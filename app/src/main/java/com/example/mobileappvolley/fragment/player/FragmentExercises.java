@@ -33,6 +33,7 @@ public class FragmentExercises extends Fragment {
     private RecyclerViewAdapterExercises recyclerViewAdapterExercises;
     ArrayList<Exercise> exercises = new ArrayList<>();
 
+    //TODO: Do zrobienia po stronie playera
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
