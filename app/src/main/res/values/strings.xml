@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">MobileAppVolley</string>
+    <string name="tittle">Volleyball training management system</string>
+    <string name="infoPlayer">Here you can edit your player parameters</string>
+</resources>

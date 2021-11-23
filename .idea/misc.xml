@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Semestr7/MobileAppVolley/app/src/main/res/drawable-v24/button_login.xml" value="0.202734375" />
+        <entry key="..\:/Semestr7/MobileAppVolley/app/src/main/res/drawable-v24/rounded.xml" value="0.109765625" />
+        <entry key="..\:/Semestr7/MobileAppVolley/app/src/main/res/drawable/button_save.xml" value="0.25341796875" />
+        <entry key="..\:/Semestr7/MobileAppVolley/app/src/main/res/drawable/round_white_background.xml" value="0.25341796875" />
+        <entry key="..\:/Semestr7/MobileAppVolley/app/src/main/res/drawable/shape_card.xml" value="0.202734375" />
+        <entry key="..\:/Semestr7/MobileAppVolley/app/src/main/res/drawable/start_button.xml" value="0.2703125" />
+        <entry key="..\:/Semestr7/MobileAppVolley/app/src/main/res/layout-sw600dp/fragment_login.xml" value="0.275" />
+        <entry key="..\:/Semestr7/MobileAppVolley/app/src/main/res/layout/activity_auth.xml" value="0.1" />
+        <entry key="..\:/Semestr7/MobileAppVolley/app/src/main/res/layout/activity_coach.xml" value="0.19423076923076923" />
+        <entry key="..\:/Semestr7/MobileAppVolley/app/src/main/res/layout/activity_login.xml" value="0.2" />
+        <entry key="..\:/Semestr7/MobileAppVolley/app/src/main/res/layout/activity_main.xml" value="0.152" />
+        <entry key="..\:/Semestr7/MobileAppVolley/app/src/main/res/layout/activity_main_player.xml" value="0.190625" />
+        <entry key="..\:/Semestr7/MobileAppVolley/app/src/main/res/layout/activity_player.xml" value="0.19423076923076923" />
+        <entry key="..\:/Semestr7/MobileAppVolley/app/src/main/res/layout/activity_register.xml" value="0.128" />
+        <entry key="..\:/Semestr7/MobileAppVolley/app/src/main/res/layout/activity_register2.xml" value="0.1793478260869565" />
+        <entry key="..\:/Semestr7/MobileAppVolley/app/src/main/res/layout/fragment_exercise.xml" value="0.1919871794871795" />
+        <entry key="..\:/Semestr7/MobileAppVolley/app/src/main/res/layout/fragment_exercises.xml" value="0.176" />
+        <entry key="..\:/Semestr7/MobileAppVolley/app/src/main/res/layout/fragment_exercises_player.xml" value="0.18717948717948718" />
+        <entry key="..\:/Semestr7/MobileAppVolley/app/src/main/res/layout/fragment_home.xml" value="0.176" />
+        <entry key="..\:/Semestr7/MobileAppVolley/app/src/main/res/layout/fragment_home_coach.xml" value="0.176" />
+        <entry key="..\:/Semestr7/MobileAppVolley/app/src/main/res/layout/fragment_home_player.xml" value="0.2" />
+        <entry key="..\:/Semestr7/MobileAppVolley/app/src/main/res/layout/fragment_login.xml" value="0.16" />
+        <entry key="..\:/Semestr7/MobileAppVolley/app/src/main/res/layout/fragment_player.xml" value="0.19647435897435897" />
+        <entry key="..\:/Semestr7/MobileAppVolley/app/src/main/res/layout/fragment_register.xml" value="0.2" />
+        <entry key="..\:/Semestr7/MobileAppVolley/app/src/main/res/layout/fragment_training_creator.xml" value="0.2" />
+        <entry key="..\:/Semestr7/MobileAppVolley/app/src/main/res/layout/item_exercise.xml" value="0.19423076923076923" />
+        <entry key="..\:/Semestr7/MobileAppVolley/app/src/main/res/layout/item_home_player.xml" value="0.264" />
+        <entry key="..\:/Semestr7/MobileAppVolley/app/src/main/res/layout/register_fragment.xml" value="0.1" />
+        <entry key="..\:/Semestr7/MobileAppVolley/app/src/main/res/menu/menu_bottom.xml" value="0.190625" />
+        <entry key="..\:/Semestr7/MobileAppVolley/app/src/main/res/menu/menu_bottom_player.xml" value="0.190625" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="position" type="id"/>
+    <item name="age" type="id"/>
+    <item name="attackRange" type="id"/>
+    <item name="blockRange" type="id"/>
+    <item name="height" type="id"/>
+    <item name="weight" type="id"/>
+</resources>

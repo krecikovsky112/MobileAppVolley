@@ -1,0 +1,44 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="callback"
+            type="com.example.mobileappvolley.fragment.coach.FragmentExercises" />
+    </data>
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:padding="2dp"
+        tools:context=".fragment.coach.FragmentExercises">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="50dp"
+            android:fontFamily="@font/dongle_regular"
+            android:text="List of exercises"
+            android:textAlignment="center"
+            android:textColor="@color/main_color"
+            android:textSize="50sp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:background="#EFF3FF"
+            android:id="@+id/exercisesRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/title"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="0dp" />
+    </RelativeLayout>
+
+</layout>

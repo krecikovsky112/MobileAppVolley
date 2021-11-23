@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "24188952183",
+    "project_id": "mobileappvolley-16965",
+    "storage_bucket": "mobileappvolley-16965.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:24188952183:android:4688115c27f564e4ac3072",
+        "android_client_info": {
+          "package_name": "com.example.mobileappvolley"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "24188952183-mhdi86b271al785qavl3gfripksg0ha8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1Wriz5aKkBq3R9W0m66PY86-FNzbrsbM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "24188952183-mhdi86b271al785qavl3gfripksg0ha8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
