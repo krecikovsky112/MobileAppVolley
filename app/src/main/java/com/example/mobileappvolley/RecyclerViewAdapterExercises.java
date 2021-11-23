@@ -9,8 +9,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.mobileappvolley.Model.Exercise;
+import com.example.mobileappvolley.ViewHolder.Coach.ExerciseViewHolder;
 import com.example.mobileappvolley.fragment.coach.ExerciseFragment;
-import com.example.mobileappvolley.fragment.coach.PlayerFragment;
 
 import java.util.ArrayList;
 

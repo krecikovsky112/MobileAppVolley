@@ -1,18 +1,14 @@
 package com.example.mobileappvolley.fragment.coach;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,12 +16,10 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
-import com.example.mobileappvolley.Exercise;
-import com.example.mobileappvolley.Player;
+import com.example.mobileappvolley.Model.Exercise;
 import com.example.mobileappvolley.R;
 import com.example.mobileappvolley.activity.AuthActivity;
 import com.example.mobileappvolley.databinding.FragmentExerciseBinding;
-import com.example.mobileappvolley.databinding.FragmentPlayerBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -33,8 +27,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class ExerciseFragment extends Fragment {
 

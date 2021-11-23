@@ -1,4 +1,4 @@
-package com.example.mobileappvolley;
+package com.example.mobileappvolley.Model;
 
 public class Player {
     private int id;

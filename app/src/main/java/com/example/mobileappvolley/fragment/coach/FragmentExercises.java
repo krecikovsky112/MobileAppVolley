@@ -12,11 +12,8 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.mobileappvolley.Exercise;
-import com.example.mobileappvolley.ExerciseViewHolder;
-import com.example.mobileappvolley.Player;
+import com.example.mobileappvolley.Model.Exercise;
 import com.example.mobileappvolley.R;
-import com.example.mobileappvolley.RecyclerViewAdapter;
 import com.example.mobileappvolley.RecyclerViewAdapterExercises;
 import com.example.mobileappvolley.activity.AuthActivity;
 import com.example.mobileappvolley.databinding.FragmentExercisesBinding;

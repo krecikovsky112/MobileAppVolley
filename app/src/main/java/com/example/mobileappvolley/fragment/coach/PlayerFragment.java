@@ -14,20 +14,17 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
-import com.example.mobileappvolley.Player;
+import com.example.mobileappvolley.Model.Player;
 import com.example.mobileappvolley.R;
 import com.example.mobileappvolley.activity.AuthActivity;
-import com.example.mobileappvolley.activity.MainActivity;
 import com.example.mobileappvolley.databinding.FragmentPlayerBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 
 import java.util.HashMap;
 import java.util.Map;

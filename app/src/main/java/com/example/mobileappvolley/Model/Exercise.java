@@ -1,4 +1,4 @@
-package com.example.mobileappvolley;
+package com.example.mobileappvolley.Model;
 
 import java.util.ArrayList;
 

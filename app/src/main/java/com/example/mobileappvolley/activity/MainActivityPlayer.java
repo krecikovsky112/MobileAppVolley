@@ -15,13 +15,19 @@ import com.example.mobileappvolley.fragment.player.FragmentExercises;
 import com.example.mobileappvolley.fragment.player.FragmentHomePlayer;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 public class MainActivityPlayer extends AppCompatActivity {
 
     private ActivityPlayerBinding activityPlayerBinding;
+    private FirebaseUser firebaseUser;
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
     private FirebaseAuth firebaseAuth;
+    private String position;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,6 +42,8 @@ public class MainActivityPlayer extends AppCompatActivity {
             checkUser();
         });
 
+        getPlayerInfo();
+
         activityPlayerBinding.navigationbar.setOnItemSelectedListener(i -> {
             System.out.println(i);
 
@@ -44,11 +52,13 @@ public class MainActivityPlayer extends AppCompatActivity {
                 this.getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, myFragment).addToBackStack("okj").commit();
             }
             else if(i == R.id.exercises){
-                FragmentExercises myFragment = new FragmentExercises();
+                FragmentExercises myFragment = FragmentExercises.newInstance(position);
                 this.getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, myFragment).addToBackStack("okj").commit();
 
             }
         });
+
+
     }
 
     public void addFragmentHomePlayer() {
@@ -61,9 +71,33 @@ public class MainActivityPlayer extends AppCompatActivity {
     }
 
     private void checkUser() {
-        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+         firebaseUser = firebaseAuth.getCurrentUser();
         if (firebaseUser == null) {
             startActivity(new Intent(this, AuthActivity.class));
         }
+    }
+
+    private void getPlayerInfo() {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        firebaseUser = firebaseAuth.getCurrentUser();
+        CollectionReference ref = db.collection("Players");
+
+        Query query = ref.whereEqualTo("idUser", firebaseUser.getUid());
+
+        query.get().addOnCompleteListener(task -> {
+            if(task.isSuccessful()){
+                for(QueryDocumentSnapshot document : task.getResult()){
+                    System.out.println("DocumentSnapshot data: " + document.getData());
+
+                    position = document.getString("position");
+
+                }
+            }
+            else{
+                System.out.println("get failed with " + task.getException());
+            }
+        });
+
+
     }
 }
