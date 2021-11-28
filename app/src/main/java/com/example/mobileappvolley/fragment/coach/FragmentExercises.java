@@ -55,7 +55,7 @@ public class FragmentExercises  extends Fragment {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference ref = db.collection("Exercises");
 
-        Query query = ref;
+        Query query = ref.orderBy("order", Query.Direction.ASCENDING);
 
         query.addSnapshotListener((value, error) -> {
             exercises.clear();

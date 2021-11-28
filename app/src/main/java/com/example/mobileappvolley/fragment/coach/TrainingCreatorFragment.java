@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,6 +25,8 @@ import java.util.Map;
 public class TrainingCreatorFragment extends Fragment {
     private FragmentTrainingCreatorBinding fragmentTrainingCreatorBinding;
     private boolean urgentFlag = false;
+    ArrayList<Integer> numbers = new ArrayList<>();
+    private int order;
 
     @Nullable
     @Override
@@ -31,6 +34,15 @@ public class TrainingCreatorFragment extends Fragment {
         fragmentTrainingCreatorBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_training_creator, container, false);
         fragmentTrainingCreatorBinding.setCallback(this);
         View view = fragmentTrainingCreatorBinding.getRoot();
+
+        for (int i = 1; i < 6; i++) {
+            numbers.add(i);
+        }
+
+        ArrayAdapter<Integer> dataAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, numbers);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        fragmentTrainingCreatorBinding.numberSpinner.setAdapter(dataAdapter);
+        order = Integer.parseInt(fragmentTrainingCreatorBinding.numberSpinner.getSelectedItem().toString());
 
         return view;
     }
@@ -40,27 +52,28 @@ public class TrainingCreatorFragment extends Fragment {
 
     }
 
-    public void onClickAddExercise(){
+    public void onClickAddExercise() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         ArrayList<String> type = new ArrayList<>();
         Map<String, Object> exercises = new HashMap<>();
-        exercises.put("name",fragmentTrainingCreatorBinding.editTextNameExercise.getText().toString());
-        exercises.put("numberRepeat",Integer.parseInt(fragmentTrainingCreatorBinding.editTextNumberRepeat.getText().toString()));
-        exercises.put("description",fragmentTrainingCreatorBinding.editTextDescription.getText().toString());
-        exercises.put("urgent",urgentFlag);
+        exercises.put("name", fragmentTrainingCreatorBinding.editTextNameExercise.getText().toString());
+        exercises.put("numberRepeat", Integer.parseInt(fragmentTrainingCreatorBinding.editTextNumberRepeat.getText().toString()));
+        exercises.put("description", fragmentTrainingCreatorBinding.editTextDescription.getText().toString());
+        exercises.put("urgent", urgentFlag);
+        exercises.put("order",order);
 
-        if(fragmentTrainingCreatorBinding.checkboxReceiver.isChecked())
+        if (fragmentTrainingCreatorBinding.checkboxReceiver.isChecked())
             type.add("Receiver");
-        if(fragmentTrainingCreatorBinding.checkboxLibero.isChecked())
+        if (fragmentTrainingCreatorBinding.checkboxLibero.isChecked())
             type.add("Libero");
-        if(fragmentTrainingCreatorBinding.checkboxSetter.isChecked())
+        if (fragmentTrainingCreatorBinding.checkboxSetter.isChecked())
             type.add("Setter");
-        if(fragmentTrainingCreatorBinding.checkboxMiddleBlocker.isChecked())
+        if (fragmentTrainingCreatorBinding.checkboxMiddleBlocker.isChecked())
             type.add("Middle blocker");
-        if(fragmentTrainingCreatorBinding.checkboxSpiker.isChecked())
+        if (fragmentTrainingCreatorBinding.checkboxSpiker.isChecked())
             type.add("Spiker");
-        exercises.put("type",type);
+        exercises.put("type", type);
 
         db.collection("Exercises").add(exercises);
 
@@ -91,7 +104,7 @@ public class TrainingCreatorFragment extends Fragment {
         builder1.setNegativeButton(
                 "Continue",
                 (dialog, id) -> {
-                    ((MainActivityCoach)getActivity()).changeToHomeNavigation();
+                    ((MainActivityCoach) getActivity()).changeToHomeNavigation();
                     AppCompatActivity activity = (AppCompatActivity) this.getContext();
                     FragmentHomeCoach myFragment = new FragmentHomeCoach();
                     assert activity != null;
@@ -103,12 +116,11 @@ public class TrainingCreatorFragment extends Fragment {
         alert11.show();
     }
 
-    public void onUrgentClick(){
-        if(!urgentFlag){
+    public void onUrgentClick() {
+        if (!urgentFlag) {
             urgentFlag = true;
             fragmentTrainingCreatorBinding.urgent.setBackgroundResource(R.drawable.alarm_red);
-        }
-        else {
+        } else {
             urgentFlag = false;
             fragmentTrainingCreatorBinding.urgent.setBackgroundResource(R.drawable.alarm);
         }
