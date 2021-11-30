@@ -68,6 +68,7 @@ public class FragmentExercises  extends Fragment {
                     exercise.setDecription(document.getString("description"));
                     exercise.setType((ArrayList<String>) document.get("type"));
                     exercise.setUrgent(document.getBoolean("urgent"));
+                    exercise.setOrder(document.getLong("order").intValue());
                     exercises.add(exercise);
                 }
                 recyclerViewAdapterExercises.setItems(exercises);

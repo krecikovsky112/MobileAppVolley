@@ -1,18 +1,16 @@
 package com.example.mobileappvolley.fragment.coach;
 
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
@@ -20,13 +18,14 @@ import com.example.mobileappvolley.Model.Exercise;
 import com.example.mobileappvolley.R;
 import com.example.mobileappvolley.activity.AuthActivity;
 import com.example.mobileappvolley.databinding.FragmentExerciseBinding;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ExerciseFragment extends Fragment {
 
@@ -38,7 +37,10 @@ public class ExerciseFragment extends Fragment {
     private static final String ARG_PARAM4 = "type";
     private static final String ARG_PARAM5 = "id";
     private static final String ARG_PARAM6 = "urgent";
+    private static final String ARG_PARAM7 = "order";
     private final Exercise exercise = new Exercise();
+    ArrayList<Integer> numbers = new ArrayList<>();
+    private int order;
 
     @Nullable
     @Override
@@ -50,98 +52,50 @@ public class ExerciseFragment extends Fragment {
 
         checkUser();
 
-        LinearLayout linearLayout = new LinearLayout(getActivity());
-        setAttibutesLinearLayout(linearLayout);
-        Button buttonUrgentChange = new Button(getContext());
-        buttonUrgentChange.setLayoutParams(new LinearLayout.LayoutParams(150, 150));
+        for (int i = 1; i < 6; i++) {
+            numbers.add(i);
+        }
+
+        ArrayAdapter<Integer> dataAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, numbers);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        fragmentExerciseBinding.numberSpinner.setAdapter(dataAdapter);
+        fragmentExerciseBinding.numberSpinner.setSelection(dataAdapter.getPosition(exercise.getOrder()));
+
         if(exercise.isUrgent()){
-            buttonUrgentChange.setBackgroundResource(R.drawable.alarm_red);
+            fragmentExerciseBinding.urgent.setBackgroundResource(R.drawable.alarm_red);
         }
         else if(!exercise.isUrgent()){
-            buttonUrgentChange.setBackgroundResource(R.drawable.alarm_white);
+            fragmentExerciseBinding.urgent.setBackgroundResource(R.drawable.alarm);
         }
 
-        //TODO: Add implementation of button
-        buttonUrgentChange.setPadding(5,0,0,10);
-        buttonUrgentChange.setOnClickListener(v -> {
-            FirebaseFirestore db = FirebaseFirestore.getInstance();
-//            db.collection("Exercises").document(exercise.getId()).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-//                @Override
-//                public void onSuccess(Void unused) {
-//                    System.out.println("Change urgent field successfully!");
-//                }
-//            }).addOnFailureListener(e -> System.out.println("Error!" + e));
-        });
-        linearLayout.addView(buttonUrgentChange);
-        Typeface face = ResourcesCompat.getFont(getActivity(), R.font.dongle_regular);
-        TextView textView = new TextView(getActivity());
-        textView.setTextSize(50);
-        textView.setPadding(100, 20, 100, 0);
-        textView.setTextColor(getResources().getColor(R.color.main_color));
-        textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-        textView.setTypeface(face);
-        textView.setText(exercise.getName());
-        linearLayout.addView(textView);
+        fragmentExerciseBinding.tittleTextView.setText(exercise.getName());
 
-        Button buttonDelete = new Button(getContext());
-        buttonDelete.setLayoutParams(new LinearLayout.LayoutParams(120, 120));
-        buttonDelete.setBackgroundResource(R.drawable.bin);
-        buttonDelete.setPadding(0,0,5,10);
-        buttonDelete.setOnClickListener(v -> {
-            FirebaseFirestore db = FirebaseFirestore.getInstance();
-            db.collection("Exercises").document(exercise.getId()).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void unused) {
-                    System.out.println("DocumentSnapshot successfully deleted!");
-                    FragmentExercises myFragment = new FragmentExercises();
-                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, myFragment).addToBackStack("okj").commit();
-                }
-            }).addOnFailureListener(e -> System.out.println("Error deleting document" + e));
-        });
-        linearLayout.addView(buttonDelete);
-        fragmentExerciseBinding.infoExerciseContainer.addView(linearLayout);
+        fragmentExerciseBinding.numberOfRepeatTextView.setText("Number of repeat: " + String.valueOf(exercise.getNumberRepeat()));
+        fragmentExerciseBinding.descriptionTextView.setText("Description: " + exercise.getDecription());
 
-        textView = new TextView(getActivity());
-        setTextViewAttributes(face, textView);
-        textView.setText("Number of repeat: " + String.valueOf(exercise.getNumberRepeat()));
-        fragmentExerciseBinding.infoExerciseContainer.addView(textView);
+        setCheckboxes();
 
-        textView = new TextView(getActivity());
-        setTextViewAttributes(face, textView);
-        textView.setText("Description: " + exercise.getDecription());
-        fragmentExerciseBinding.infoExerciseContainer.addView(textView);
-
-        textView = new TextView(getActivity());
-        setTextViewAttributes(face, textView);
-        StringBuilder stringBuilder = getStringBuilder();
-        textView.setText("Type:\n" + stringBuilder.toString());
-        fragmentExerciseBinding.infoExerciseContainer.addView(textView);
         return view;
     }
 
-    @NonNull
-    private StringBuilder getStringBuilder() {
-        StringBuilder stringBuilder = new StringBuilder();
-        ArrayList<String> type = exercise.getType();
-        for(int i = 0;i<type.size();i++){
-            stringBuilder.append("-");
-            stringBuilder.append(type.get(i)).append("\n");
+    private void setCheckboxes() {
+        for(int i = 0 ;i<exercise.getType().size();i++){
+            if(exercise.getType().get(i).equals("Receiver")){
+                fragmentExerciseBinding.checkboxReceiver.setChecked(true);
+            }
+            if(exercise.getType().get(i).equals("Libero")){
+                fragmentExerciseBinding.checkboxLibero.setChecked(true);
+            }
+            if(exercise.getType().get(i).equals("Setter")){
+                fragmentExerciseBinding.checkboxSetter.setChecked(true);
+            }
+            if(exercise.getType().get(i).equals("Middle blocker")){
+                fragmentExerciseBinding.checkboxMiddleBlocker.setChecked(true);
+            }
+            if(exercise.getType().get(i).equals("Spiker")){
+                fragmentExerciseBinding.checkboxSpiker.setChecked(true);
+            }
         }
-        return stringBuilder;
-    }
-
-    private void setAttibutesLinearLayout(LinearLayout linearLayout) {
-        linearLayout.setPadding(50, 10, 50, 10);
-        linearLayout.setOrientation(LinearLayout.HORIZONTAL);
-        linearLayout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-    }
-
-    private void setTextViewAttributes(Typeface face, TextView textView) {
-        textView.setTextSize(30);
-        textView.setPadding(0, 10, 0, 0);
-        textView.setTextColor(getResources().getColor(R.color.main_color));
-        textView.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_START);
-        textView.setTypeface(face);
     }
 
     private void checkUser() {
@@ -151,7 +105,7 @@ public class ExerciseFragment extends Fragment {
         }
     }
 
-    public static ExerciseFragment newInstance(String param1, int param2, String param3, ArrayList<String> param4,String param5, boolean param6){
+    public static ExerciseFragment newInstance(String param1, int param2, String param3, ArrayList<String> param4,String param5, boolean param6,int param7){
         ExerciseFragment fragment = new ExerciseFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
@@ -160,6 +114,7 @@ public class ExerciseFragment extends Fragment {
         args.putStringArrayList(ARG_PARAM4, param4);
         args.putString(ARG_PARAM5, param5);
         args.putBoolean(ARG_PARAM6, param6);
+        args.putInt(ARG_PARAM7, param7);
         fragment.setArguments(args);
         return fragment;
     }
@@ -174,12 +129,72 @@ public class ExerciseFragment extends Fragment {
             exercise.setType(getArguments().getStringArrayList(ARG_PARAM4));
             exercise.setId(getArguments().getString(ARG_PARAM5));
             exercise.setUrgent(getArguments().getBoolean(ARG_PARAM6));
+            exercise.setOrder(getArguments().getInt(ARG_PARAM7));
         }
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
+    }
+
+    public void onUrgentClick(){
+        if(exercise.isUrgent()){
+            exercise.setUrgent(false);
+            fragmentExerciseBinding.urgent.setBackgroundResource(R.drawable.alarm);
+        }
+        else{
+            exercise.setUrgent(true);
+            fragmentExerciseBinding.urgent.setBackgroundResource(R.drawable.alarm_red);
+        }
+
+    }
+
+    public void onDeleteClick(){
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("Exercises").document(exercise.getId()).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                System.out.println("DocumentSnapshot successfully deleted!");
+                FragmentExercises myFragment = new FragmentExercises();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, myFragment).addToBackStack("okj").commit();
+            }
+        }).addOnFailureListener(e -> System.out.println("Error deleting document" + e));
+    }
+
+    public void onSaveClick(){
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+//        EditText age = getActivity().findViewById(R.id.age);
+//        EditText attackRange = getActivity().findViewById(R.id.attackRange);
+//        EditText blockRange = getActivity().findViewById(R.id.blockRange);
+//        EditText height = getActivity().findViewById(R.id.height);
+//        EditText weight = getActivity().findViewById(R.id.weight);
+//        EditText position = getActivity().findViewById(R.id.position);
+        Map<String, Object> exerciseE = new HashMap<>();
+        exerciseE.put("order",Integer.parseInt(fragmentExerciseBinding.numberSpinner.getSelectedItem().toString()));
+        exerciseE.put("urgent",exercise.isUrgent());
+        ArrayList<String> type = new ArrayList<>();
+        if (fragmentExerciseBinding.checkboxReceiver.isChecked())
+            type.add("Receiver");
+        if (fragmentExerciseBinding.checkboxLibero.isChecked())
+            type.add("Libero");
+        if (fragmentExerciseBinding.checkboxSetter.isChecked())
+            type.add("Setter");
+        if (fragmentExerciseBinding.checkboxMiddleBlocker.isChecked())
+            type.add("Middle blocker");
+        if (fragmentExerciseBinding.checkboxSpiker.isChecked())
+            type.add("Spiker");
+        exerciseE.put("type",type);
+
+        db.collection("Exercises").document(String.valueOf(exercise.getId())).update(exerciseE).addOnCompleteListener(task -> {
+            if(task.isSuccessful()){
+                Toast.makeText(getActivity(),"Values added!",Toast.LENGTH_SHORT).show();
+            }
+            else{
+                Toast.makeText(getActivity(),"Error!",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 }

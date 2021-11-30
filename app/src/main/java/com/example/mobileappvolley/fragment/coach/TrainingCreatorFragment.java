@@ -26,7 +26,6 @@ public class TrainingCreatorFragment extends Fragment {
     private FragmentTrainingCreatorBinding fragmentTrainingCreatorBinding;
     private boolean urgentFlag = false;
     ArrayList<Integer> numbers = new ArrayList<>();
-    private int order;
 
     @Nullable
     @Override
@@ -42,7 +41,6 @@ public class TrainingCreatorFragment extends Fragment {
         ArrayAdapter<Integer> dataAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, numbers);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         fragmentTrainingCreatorBinding.numberSpinner.setAdapter(dataAdapter);
-        order = Integer.parseInt(fragmentTrainingCreatorBinding.numberSpinner.getSelectedItem().toString());
 
         return view;
     }
@@ -61,7 +59,7 @@ public class TrainingCreatorFragment extends Fragment {
         exercises.put("numberRepeat", Integer.parseInt(fragmentTrainingCreatorBinding.editTextNumberRepeat.getText().toString()));
         exercises.put("description", fragmentTrainingCreatorBinding.editTextDescription.getText().toString());
         exercises.put("urgent", urgentFlag);
-        exercises.put("order",order);
+        exercises.put("order",Integer.parseInt(fragmentTrainingCreatorBinding.numberSpinner.getSelectedItem().toString()));
 
         if (fragmentTrainingCreatorBinding.checkboxReceiver.isChecked())
             type.add("Receiver");

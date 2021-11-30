@@ -8,27 +8,196 @@
     </data>
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="match_parent"
         android:padding="2dp"
         tools:context=".fragment.ExerciseFragment">
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <LinearLayout
                 android:id="@+id/infoExerciseContainer"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="0dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="0dp"
                 android:orientation="vertical">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/delete"
+                        android:layout_width="38dp"
+                        android:layout_height="38dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/bin"
+                        android:onClick='@{() -> callback.onDeleteClick()}'
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tittleTextView"
+                        android:layout_width="265dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/dongle_regular"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:textAlignment="center"
+
+                        android:textColor="@color/main_color"
+                        android:textSize="50sp" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/urgent"
+                        android:layout_width="38dp"
+                        android:layout_height="38dp"
+                        android:layout_gravity="center"
+                        android:onClick='@{() -> callback.onUrgentClick()}' />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/numberOfRepeatTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/dongle_regular"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/main_color"
+                    android:textSize="35sp" />
+
+                <TextView
+                    android:id="@+id/descriptionTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/dongle_regular"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/main_color"
+                    android:textSize="35sp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/numberSpinnerTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/dongle_regular"
+                        android:gravity="center"
+                        android:text="Order:"
+                        android:textColor="#17358b"
+                        android:textSize="35sp" />
+
+                    <androidx.appcompat.widget.AppCompatSpinner
+                        android:id="@+id/numberSpinner"
+                        android:layout_width="100dp"
+                        android:layout_height="40dp" />
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:id="@+id/checkboxesGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingTop="10dp">
+
+                    <CheckBox
+                        android:id="@+id/checkbox_receiver"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginStart="0dp"
+                        android:layout_marginTop="0dp"
+                        android:fontFamily="@font/roboto"
+                        android:textSize="17sp"
+                        android:text="Receiver"
+                        android:textColor="#17358b"
+                        android:textStyle="bold|italic"
+                        app:buttonTint="#17358b" />
+
+                    <CheckBox
+                        android:id="@+id/checkbox_libero"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:layout_below="@+id/checkbox_receiver"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginStart="0dp"
+                        android:layout_marginTop="0dp"
+                        android:fontFamily="@font/roboto"
+                        android:text="Libero"
+                        android:textSize="17sp"
+                        android:textColor="#17358b"
+                        android:textStyle="bold|italic"
+                        app:buttonTint="#17358b" />
+
+                    <CheckBox
+                        android:id="@+id/checkbox_setter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:layout_below="@+id/checkbox_middle_blocker"
+                        android:layout_marginStart="0dp"
+                        android:layout_marginTop="0dp"
+                        android:textSize="17sp"
+                        android:layout_toEndOf="@+id/checkbox_libero"
+                        android:fontFamily="@font/roboto"
+                        android:text="Setter"
+                        android:textColor="#17358b"
+                        android:textStyle="bold|italic"
+                        app:buttonTint="#17358b" />
+
+                    <CheckBox
+                        android:id="@+id/checkbox_spiker"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:textSize="17sp"
+                        android:layout_below="@+id/checkbox_middle_blocker"
+                        android:layout_marginStart="0dp"
+                        android:layout_marginTop="0dp"
+                        android:layout_toEndOf="@+id/checkbox_setter"
+                        android:fontFamily="@font/roboto"
+                        android:text="Spiker"
+                        android:textColor="#17358b"
+                        android:textStyle="bold|italic"
+                        app:buttonTint="#17358b" />
+
+                    <CheckBox
+                        android:id="@+id/checkbox_middle_blocker"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:textSize="17sp"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginStart="0dp"
+                        android:layout_marginTop="0dp"
+                        android:layout_toEndOf="@+id/checkbox_receiver"
+                        android:fontFamily="@font/roboto"
+                        android:text="Middle blocker"
+                        android:textColor="#17358b"
+                        android:textStyle="bold|italic"
+                        app:buttonTint="#17358b" />
+                </RelativeLayout>
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/save"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/button_login"
+                    android:src="@drawable/save_exercise"
+                    android:textColor="@color/white"
+                    android:onClick='@{() -> callback.onSaveClick()}'/>
             </LinearLayout>
         </ScrollView>
 

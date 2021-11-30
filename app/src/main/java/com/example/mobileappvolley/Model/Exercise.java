@@ -9,6 +9,15 @@ public class Exercise {
     private String decription;
     private ArrayList<String> type;
     private boolean urgent;
+    private int order;
+
+    public int getOrder() {
+        return order;
+    }
+
+    public void setOrder(int order) {
+        this.order = order;
+    }
 
     public String getDecription() {
         return decription;

@@ -48,14 +48,14 @@ public class RecyclerViewAdapterExercises extends RecyclerView.Adapter<RecyclerV
         }
         exerciseViewHolder.typeTextview.setText(temp);
         if(exercise.isUrgent())
-            exerciseViewHolder.alarmImage.setBackgroundResource(R.drawable.alarm_yellow);
+            exerciseViewHolder.alarmImage.setBackgroundResource(R.drawable.alarm_red);
         else
             exerciseViewHolder.alarmImage.setBackgroundResource(R.drawable.alarm_white);
 
 
         holder.itemView.setOnClickListener(view -> {
             AppCompatActivity activity = (AppCompatActivity) view.getContext();
-            ExerciseFragment myFragment= ExerciseFragment.newInstance(exercise.getName(),exercise.getNumberRepeat(),exercise.getDecription(),exercise.getType(),exercise.getId(),exercise.isUrgent());
+            ExerciseFragment myFragment= ExerciseFragment.newInstance(exercise.getName(),exercise.getNumberRepeat(),exercise.getDecription(),exercise.getType(),exercise.getId(),exercise.isUrgent(),exercise.getOrder());
             activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, myFragment).addToBackStack("okj").commit();
         });
     }
