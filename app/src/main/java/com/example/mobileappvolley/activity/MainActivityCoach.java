@@ -13,6 +13,7 @@ import com.example.mobileappvolley.R;
 import com.example.mobileappvolley.databinding.ActivityCoachBinding;
 import com.example.mobileappvolley.fragment.coach.FragmentExercises;
 import com.example.mobileappvolley.fragment.coach.FragmentHomeCoach;
+import com.example.mobileappvolley.fragment.coach.FragmentNotifications;
 import com.example.mobileappvolley.fragment.coach.TrainingCreatorFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -48,6 +49,10 @@ public class MainActivityCoach extends AppCompatActivity {
                 this.getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, myFragment).addToBackStack("okj").commit();
             } else if (i == R.id.exercises) {
                 FragmentExercises myFragment = new FragmentExercises();
+                this.getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, myFragment).addToBackStack("okj").commit();
+            }
+            else if(i == R.id.notifications){
+                FragmentNotifications myFragment = new FragmentNotifications();
                 this.getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, myFragment).addToBackStack("okj").commit();
             }
         });

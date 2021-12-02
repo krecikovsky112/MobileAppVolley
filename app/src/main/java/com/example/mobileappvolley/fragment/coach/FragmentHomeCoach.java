@@ -66,6 +66,7 @@ public class FragmentHomeCoach extends Fragment {
                     int id = document.getLong("id").intValue();
                     Player player = new Player();
                     player.setId(id);
+                    player.setIdUser(document.getString("idUser"));
                     player.setName(document.getString("name"));
                     player.setAge(document.getLong("age").intValue());
                     player.setAttackRange(document.getLong("attackRange").intValue());

@@ -14,16 +14,23 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
 import com.example.mobileappvolley.Model.Player;
+import com.example.mobileappvolley.Model.Token;
 import com.example.mobileappvolley.R;
 import com.example.mobileappvolley.activity.AuthActivity;
 import com.example.mobileappvolley.databinding.FragmentPlayerBinding;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -40,6 +47,7 @@ public class PlayerFragment extends Fragment {
     private static final String ARG_PARAM6 = "height";
     private static final String ARG_PARAM7 = "weight";
     private static final String ARG_PARAM8 = "age";
+    private static final String ARG_PARAM9 = "idUser";
     private final Player player = new Player();
 
     @Nullable
@@ -176,7 +184,7 @@ public class PlayerFragment extends Fragment {
         }
     }
 
-    public static PlayerFragment newInstance(String param1, String param2, String param3,String param4, String param5, String param6,String param7, String param8){
+    public static PlayerFragment newInstance(String param1, String param2, String param3,String param4, String param5, String param6,String param7, String param8,String param9){
         PlayerFragment fragment = new PlayerFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
@@ -187,6 +195,7 @@ public class PlayerFragment extends Fragment {
         args.putString(ARG_PARAM6, param6);
         args.putString(ARG_PARAM7, param7);
         args.putString(ARG_PARAM8, param8);
+        args.putString(ARG_PARAM9, param9);
         fragment.setArguments(args);
         return fragment;
     }
@@ -203,6 +212,7 @@ public class PlayerFragment extends Fragment {
             player.setHeight(Integer.parseInt(getArguments().getString(ARG_PARAM6)));
             player.setWeight(Integer.parseInt(getArguments().getString(ARG_PARAM7)));
             player.setAge(Integer.parseInt(getArguments().getString(ARG_PARAM8)));
+            player.setIdUser(getArguments().getString(ARG_PARAM9));
         }
     }
 
@@ -238,5 +248,10 @@ public class PlayerFragment extends Fragment {
      }
     });
 
+    }
+
+    public void onClickSend(){
+        FragmentNotifications myFragment= FragmentNotifications.newInstance(player.getIdUser());
+        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, myFragment).addToBackStack("okj").commit();
     }
 }

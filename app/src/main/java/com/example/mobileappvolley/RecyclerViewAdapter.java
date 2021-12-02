@@ -45,7 +45,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         holder.itemView.setOnClickListener(view -> {
             AppCompatActivity activity = (AppCompatActivity) view.getContext();
-            PlayerFragment myFragment= PlayerFragment.newInstance(player.getName(), String.valueOf(player.getId()),player.getPosition(),String.valueOf(player.getBlockRange()),String.valueOf(player.getAttackRange()),String.valueOf(player.getHeight()),String.valueOf(player.getWeight()),String.valueOf(player.getAge()));
+            PlayerFragment myFragment= PlayerFragment.newInstance(player.getName(), String.valueOf(player.getId()),player.getPosition(),String.valueOf(player.getBlockRange()),String.valueOf(player.getAttackRange()),String.valueOf(player.getHeight()),String.valueOf(player.getWeight()),String.valueOf(player.getAge()),player.getIdUser());
             activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, myFragment).addToBackStack("okj").commit();
         });
     }

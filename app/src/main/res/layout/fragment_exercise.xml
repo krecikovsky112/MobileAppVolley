@@ -122,9 +122,9 @@
                         android:layout_marginStart="0dp"
                         android:layout_marginTop="0dp"
                         android:fontFamily="@font/roboto"
-                        android:textSize="17sp"
                         android:text="Receiver"
                         android:textColor="#17358b"
+                        android:textSize="17sp"
                         android:textStyle="bold|italic"
                         app:buttonTint="#17358b" />
 

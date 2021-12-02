@@ -9,6 +9,7 @@ public class Player {
     private int height;
     private String position;
     private int weight;
+    private String idUser;
 
     public int getId() {
         return id;
@@ -72,5 +73,13 @@ public class Player {
 
     public void setWeight(int weight) {
         this.weight = weight;
+    }
+
+    public String getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(String idUser) {
+        this.idUser = idUser;
     }
 }
