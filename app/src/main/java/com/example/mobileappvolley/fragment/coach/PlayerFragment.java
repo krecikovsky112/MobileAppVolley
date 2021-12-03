@@ -251,7 +251,7 @@ public class PlayerFragment extends Fragment {
     }
 
     public void onClickSend(){
-        FragmentNotifications myFragment= FragmentNotifications.newInstance(player.getIdUser());
+        FragmentNotificationConcretePlayer myFragment= FragmentNotificationConcretePlayer.newInstance(player.getIdUser(),player.getName());
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, myFragment).addToBackStack("okj").commit();
     }
 }

@@ -1,0 +1,114 @@
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="callback"
+            type="com.example.mobileappvolley.fragment.coach.FragmentNotificationConcretePlayer" />
+    </data>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="2dp"
+        tools:context=".fragment.FragmentNotificationConcretePlayer">
+
+        <TextView
+            android:id="@+id/tittle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="0dp"
+            android:fontFamily="@font/dongle_regular"
+            android:gravity="center"
+
+            android:textColor="#17358b"
+            android:textSize="33sp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textviewNumberOfRepeat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tittle"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="20dp"
+            android:hint="Title"
+            android:textColorHint="@color/main_color"
+            app:boxBackgroundColor="@color/white"
+            app:boxStrokeColor="@color/main_color"
+            app:counterMaxLength="20"
+            app:counterEnabled="true"
+            app:counterTextColor="@color/main_color"
+            app:hintTextColor="@color/main_color"
+            app:placeholderTextColor="@color/main_color"
+            app:startIconDrawable="@drawable/title"
+            app:startIconTint="@color/main_color">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textField"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="0dp"
+                android:ems="10"
+                android:inputType="text"
+                android:textColor="@color/main_color" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textArea"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textviewNumberOfRepeat"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="20dp"
+            android:hint="Message"
+            android:textColorHint="@color/main_color"
+            app:boxBackgroundColor="@color/white"
+            app:boxStrokeColor="@color/main_color"
+            app:counterTextColor="@color/main_color"
+            app:hintTextColor="@color/main_color"
+            app:placeholderTextColor="@color/main_color"
+            app:startIconDrawable="@drawable/description"
+            app:startIconTint="@color/main_color">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextMessage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textField"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="0dp"
+                android:ems="10"
+                android:inputType="text|textMultiLine"
+                android:textColor="@color/main_color" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textArea"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="82dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="82dp"
+            android:background="@drawable/button_login"
+            android:onClick='@{() -> callback.onClickSend()}'
+            android:text="Send"
+            android:textColor="@color/white" />
+    </RelativeLayout>
+
+</layout>

@@ -15,6 +15,7 @@ import com.example.mobileappvolley.R;
 import com.example.mobileappvolley.databinding.ActivityPlayerBinding;
 import com.example.mobileappvolley.fragment.player.FragmentExercises;
 import com.example.mobileappvolley.fragment.player.FragmentHomePlayer;
+import com.example.mobileappvolley.fragment.player.FragmentNotificationsPlayer;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -67,7 +68,10 @@ public class MainActivityPlayer extends AppCompatActivity {
             else if(i == R.id.exercises){
                 FragmentExercises myFragment = FragmentExercises.newInstance(position);
                 this.getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, myFragment).addToBackStack("okj").commit();
-
+            }
+            else if(i == R.id.notifications){
+                FragmentNotificationsPlayer myFragment = new FragmentNotificationsPlayer();
+                this.getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, myFragment).addToBackStack("okj").commit();
             }
         });
 
