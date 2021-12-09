@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
@@ -6,38 +5,61 @@
     <data>
         <variable
             name="callback"
-            type="com.example.mobileappvolley.fragment.auth.FragmentLogin" />
+            type="com.example.mobileappvolley.fragment.auth.FragmentRegister" />
     </data>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="20dp"
-        tools:context=".fragment.auth.FragmentLogin">
+        tools:context=".fragment.auth.FragmentRegister">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textField4"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@id/imageView"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="300dp"
+            android:layout_marginEnd="100dp"
+            android:hint="fullname"
+            app:boxBackgroundColor="@color/white"
+            app:startIconDrawable="@drawable/idcard">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextFullName"
+                android:textSize="26sp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/imageView"
+                android:layout_centerHorizontal="true"
+
+                android:inputType="textPersonName" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textField"
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:layout_below="@+id/imageView"
-            android:layout_alignParentStart="true"
+            android:layout_below="@+id/textField4"
 
+            android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="100dp"
-            android:layout_marginEnd="100dp"
             android:layout_marginTop="0dp"
-
+            android:layout_marginEnd="100dp"
             android:hint="email"
             app:boxBackgroundColor="@color/white"
-            app:startIconDrawable="@drawable/email"
-            app:boxStrokeWidth="0dp"
-            >
+            app:startIconDrawable="@drawable/email">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/inputEmailText"
-                android:textSize="26sp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:textSize="26sp"
                 android:layout_below="@+id/imageView"
                 android:layout_centerHorizontal="true"
 
@@ -57,8 +79,7 @@
             android:hint="password"
             app:boxBackgroundColor="@color/white"
             app:endIconMode="password_toggle"
-            app:startIconDrawable="@drawable/padlock"
-            app:boxStrokeWidth="0dp">
+            app:startIconDrawable="@drawable/padlock">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editTextPassword"
@@ -67,16 +88,18 @@
                 android:layout_below="@+id/textField"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="0dp"
-                android:ems="10"
                 android:textSize="26sp"
+                android:ems="10"
+
                 android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
+
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/normalSignInButton"
             android:layout_width="wrap_content"
             android:layout_height="70dp"
-            android:layout_below="@id/textField2"
+            android:layout_below="@+id/radioGroup"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="150dp"
@@ -84,9 +107,49 @@
             android:layout_marginEnd="150dp"
             android:background="@drawable/button_login"
             android:onClick='@{() -> callback.onSubmit()}'
-            android:text="Sign In"
+            android:text="Sign Up"
             android:textColor="@color/white"
-            android:textSize="33sp" />
+            android:textSize="30sp" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textField2"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="100dp"
+
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/radio_player"
+                style="@android:style/Widget.Material.CompoundButton.RadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:fontFamily="@font/roboto"
+                android:onClick='@{() -> callback.onRadioButtonClickedPlayer()}'
+                android:text="player"
+                android:textSize="26sp"
+                android:textColor="#17358b"
+                android:textStyle="bold|italic"
+                app:buttonTint="#17358b" />
+
+            <RadioButton
+                android:id="@+id/radio_coach"
+                style="@style/Widget.AppCompat.CompoundButton.RadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:fontFamily="@font/roboto"
+                android:onClick='@{() -> callback.onRadioButtonClickedCoach()}'
+                android:text="coach"
+                android:textSize="26sp"
+                android:textColor="#17358b"
+                android:textStyle="bold|italic"
+                app:buttonTint="#17358b" />
+        </RadioGroup>
 
         <ImageView
             android:id="@+id/imageView"
@@ -100,23 +163,6 @@
             android:layout_marginEnd="200dp"
             app:srcCompat="@drawable/logo" />
 
-        <TextView
-            android:id="@+id/signUpText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/normalSignInButton"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="60dp"
-            android:layout_marginTop="15dp"
-
-            android:layout_marginEnd="60dp"
-            android:onClick='@{() -> callback.onSignUpTextClick()}'
-            android:text="Create an account"
-            android:textAlignment="center"
-            android:textColor="#17358b"
-            android:textSize="35sp"
-            android:textStyle="bold|italic" />
     </RelativeLayout>
 
 </layout>
