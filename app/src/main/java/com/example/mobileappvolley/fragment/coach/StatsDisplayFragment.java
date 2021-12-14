@@ -1,9 +1,13 @@
 package com.example.mobileappvolley.fragment.coach;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,9 +17,11 @@ import androidx.fragment.app.Fragment;
 import com.example.mobileappvolley.R;
 import com.example.mobileappvolley.databinding.FragmentStatsCoachBinding;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,8 +38,107 @@ public class StatsDisplayFragment extends Fragment {
         View view = fragmentStatsCoachBinding.getRoot();
         firebaseAuth = FirebaseAuth.getInstance();
 
-        addData();
+//        addData();
+        leadData();
         return view;
+    }
+
+    private void leadData() {
+        final long[] attackPercent = {0};
+        final long[] block = {0};
+        final int[] points = {0};
+        final long[] receivePercent = {0};
+        final long[] serve = {0};
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        CollectionReference ref = db.collection("Stats");
+        Query query = ref.orderBy("points", Query.Direction.DESCENDING);
+        query.addSnapshotListener((value, error) -> {
+            if (error == null) {
+
+                for (QueryDocumentSnapshot document : value) {
+                    TableRow tr = new TableRow(getActivity());
+                    tr.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
+                    points[0] = document.getLong("points").intValue();
+
+                    getValueFromMap(attackPercent, document, "attack", "perfect (%)");
+
+                    getValueFromMap(block, document, "block", "all");
+
+                    getValueFromMap(receivePercent, document, "receive", "positive (%)");
+
+                    getValueFromMap(serve, document, "serve", "ace");
+
+                    TextView textView = new TextView(getActivity());
+                    textView.setGravity(View.TEXT_ALIGNMENT_CENTER);
+                    textView.setText("Kowalski");
+                    textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    textView.setTextColor(Color.parseColor("#17358b"));
+                    textView.setTextSize(20);
+                    tr.addView(textView);
+
+                    textView = new TextView(getActivity());
+                    textView.setGravity(View.TEXT_ALIGNMENT_CENTER);
+                    textView.setText(String.valueOf(points[0]));
+                    textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    textView.setTextColor(Color.parseColor("#17358b"));
+                    textView.setTextSize(18);
+                    tr.addView(textView);
+
+                    textView = new TextView(getActivity());
+                    textView.setGravity(View.TEXT_ALIGNMENT_CENTER);
+                    textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    textView.setText(String.valueOf((int)attackPercent[0]));
+                    textView.setTextColor(Color.parseColor("#17358b"));
+                    textView.setTextSize(18);
+                    tr.addView(textView);
+
+                    textView = new TextView(getActivity());
+                    textView.setGravity(View.TEXT_ALIGNMENT_CENTER);
+                    textView.setText(String.valueOf((int)block[0]));
+                    textView.setTextColor(Color.parseColor("#17358b"));
+                    textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    textView.setTextSize(18);
+                    tr.addView(textView);
+
+                    textView = new TextView(getActivity());
+                    textView.setGravity(View.TEXT_ALIGNMENT_CENTER);
+                    textView.setText(String.valueOf((int)receivePercent[0]));
+                    textView.setTextColor(Color.parseColor("#17358b"));
+                    textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    textView.setTextSize(18);
+                    tr.addView(textView);
+
+                    textView = new TextView(getActivity());
+                    textView.setGravity(View.TEXT_ALIGNMENT_CENTER);
+                    textView.setText(String.valueOf((int)serve[0]));
+                    textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    textView.setTextColor(Color.parseColor("#17358b"));
+                    textView.setTextSize(18);
+                    tr.addView(textView);
+                    fragmentStatsCoachBinding.statsTable.addView(tr, new TableLayout.LayoutParams(TableLayout.LayoutParams.FILL_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
+
+                }
+            }
+
+        });
+
+
+
+         }
+
+    private void getValueFromMap(long[] value,QueryDocumentSnapshot document, String key1, String key2) {
+        Map<String, Object> statsMap = document.getData();
+        for (Map.Entry<String,Object> entry : statsMap.entrySet()){
+            if(entry.getKey().equals(key1)){
+                Map<String, Object> map = (Map<String, Object>) entry.getValue();
+                for (Map.Entry<String, Object> e : map.entrySet()){
+                    if (e.getKey().equals(key2)) {
+                            value[0] =  (Long)e.getValue();
+                    }
+                }
+            }
+        }
     }
 
     private void addData() {
