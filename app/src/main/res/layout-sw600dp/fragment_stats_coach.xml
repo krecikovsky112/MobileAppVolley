@@ -1,0 +1,290 @@
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="callback"
+            type="com.example.mobileappvolley.fragment.coach.StatsDisplayFragment" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="2dp"
+        tools:context=".fragment.StatsDisplayFragment">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TableLayout
+                android:id="@+id/statsTable"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+
+                android:layout_marginTop="20dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp">
+
+                <TableRow android:background="@color/main_color">
+
+                    <TextView
+
+                        android:background="@drawable/textview_border_tittles"
+                        android:layout_width="180dp"
+                        android:gravity="center"
+                        android:padding="3dip"
+                        android:text="Player"
+
+                        android:textColor="@color/yellow"
+                        android:textSize="35dp" />
+
+
+                    <TextView
+                        android:background="@drawable/textview_border_tittles"
+                        android:layout_width="40dp"
+                        android:gravity="center"
+                        android:padding="3dip"
+                        android:text="P"
+                        android:textColor="@color/yellow"
+                        android:textSize="35dp" />
+
+                    <TextView
+                        android:background="@drawable/textview_border_tittles"
+                        android:layout_width="250dp"
+                        android:gravity="center"
+                        android:padding="3dip"
+                        android:text="Attack"
+                        android:textColor="@color/yellow"
+                        android:textSize="35dp" />
+
+                    <TextView
+                        android:background="@drawable/textview_border_tittles"
+                        android:layout_width="40dp"
+                        android:gravity="center"
+                        android:padding="3dip"
+                        android:text="B"
+                        android:textColor="@color/yellow"
+                        android:textSize="35dp" />
+
+                    <TextView
+                        android:background="@drawable/textview_border_tittles"
+                        android:layout_width="350dp"
+                        android:gravity="center"
+                        android:padding="3dip"
+                        android:text="Receive"
+                        android:textColor="@color/yellow"
+                        android:textSize="35dp" />
+
+                    <TextView
+                        android:background="@drawable/textview_border_tittles"
+                        android:layout_width="150dp"
+                        android:gravity="center"
+                        android:padding="3dip"
+                        android:text="Serve"
+                        android:textColor="@color/yellow"
+                        android:textSize="35dp" />
+                </TableRow>
+            </TableLayout>
+
+            <TableLayout
+                android:id="@+id/statsTable2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/statsTable"
+                android:layout_marginTop="0dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp">
+
+                <TableRow android:background="@color/main_color">
+
+                    <TextView
+
+                        android:layout_width="180dp"
+                        android:gravity="center"
+                        android:padding="3dip"
+                        android:background="@drawable/textview_border_tittles"
+
+                        android:textColor="@color/yellow"
+                        android:textSize="35dp" />
+
+
+                        <TextView
+                            android:background="@drawable/textview_border_tittles"
+                            android:layout_width="40dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:padding="3dip"
+                            android:text="Σ"
+                            android:textColor="@color/yellow"
+                            android:textSize="30dp" />
+
+                        <TextView
+                            android:background="@drawable/textview_border_tittles"
+                            android:layout_width="40dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:padding="3dip"
+                            android:text="Σ"
+                            android:textColor="@color/yellow"
+                            android:textSize="30dp" />
+
+                        <TextView
+                            android:background="@drawable/textview_border_tittles"
+                            android:layout_width="60dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:padding="3dip"
+                            android:text="Err"
+                            android:textColor="@color/yellow"
+                            android:textSize="30dp" />
+
+                        <TextView
+                            android:background="@drawable/textview_border_tittles"
+                            android:layout_width="40dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:padding="3dip"
+                            android:text="B"
+                            android:textColor="@color/yellow"
+                            android:textSize="30dp" />
+
+                        <TextView
+                            android:background="@drawable/textview_border_tittles"
+                            android:layout_width="60dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:padding="3dip"
+                            android:text="Per"
+                            android:textColor="@color/yellow"
+                            android:textSize="30dp" />
+
+                        <TextView
+                            android:background="@drawable/textview_border_tittles"
+                            android:layout_width="50dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:padding="3dip"
+                            android:text="%"
+                            android:textColor="@color/yellow"
+                            android:textSize="30dp" />
+
+
+                    <TextView
+                        android:background="@drawable/textview_border_tittles"
+                        android:layout_width="40dp"
+                        android:gravity="center"
+                        android:padding="3dip"
+                        android:text="Σ"
+                        android:textColor="@color/yellow"
+                        android:textSize="35dp" />
+
+                        <TextView
+                            android:background="@drawable/textview_border_tittles"
+                            android:layout_width="40dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:padding="3dip"
+                            android:text="Σ"
+                            android:textColor="@color/yellow"
+                            android:textSize="30dp" />
+
+                        <TextView
+                            android:background="@drawable/textview_border_tittles"
+                            android:layout_width="60dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:padding="3dip"
+                            android:text="Err"
+                            android:textColor="@color/yellow"
+                            android:textSize="30dp" />
+
+                        <TextView
+                            android:background="@drawable/textview_border_tittles"
+                            android:layout_width="40dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:padding="3dip"
+                            android:text="N"
+                            android:textColor="@color/yellow"
+                            android:textSize="30dp" />
+
+                        <TextView
+                            android:background="@drawable/textview_border_tittles"
+                            android:layout_width="60dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:padding="3dip"
+                            android:text="Pos"
+                            android:textColor="@color/yellow"
+                            android:textSize="30dp" />
+
+                        <TextView
+                            android:background="@drawable/textview_border_tittles"
+                            android:layout_width="50dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:padding="3dip"
+                            android:text="%"
+                            android:textColor="@color/yellow"
+                            android:textSize="30dp" />
+
+                        <TextView
+                            android:background="@drawable/textview_border_tittles"
+                            android:layout_width="60dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:padding="3dip"
+                            android:text="Per"
+                            android:textColor="@color/yellow"
+                            android:textSize="30dp" />
+
+                        <TextView
+                            android:background="@drawable/textview_border_tittles"
+                            android:layout_width="40dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:padding="3dip"
+                            android:text="%"
+                            android:textColor="@color/yellow"
+                            android:textSize="30dp" />
+
+                        <TextView
+                            android:background="@drawable/textview_border_tittles"
+                            android:layout_width="40dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:padding="3dip"
+                            android:text="Σ"
+                            android:textColor="@color/yellow"
+                            android:textSize="30dp" />
+
+                        <TextView
+                            android:background="@drawable/textview_border_tittles"
+                            android:layout_width="60dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:padding="3dip"
+                            android:text="Ace"
+                            android:textColor="@color/yellow"
+                            android:textSize="30dp" />
+
+                        <TextView
+                            android:background="@drawable/textview_border_tittles"
+                            android:layout_width="50dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:padding="3dip"
+                            android:text="Err"
+                            android:textColor="@color/yellow"
+                            android:textSize="30dp" />
+
+                </TableRow>
+            </TableLayout>
+
+        </RelativeLayout>
+    </ScrollView>
+
+
+</layout>

@@ -16,59 +16,75 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-        <TableLayout
-            android:id="@+id/statsTable"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="5dp"
 
-            >
-            <TableRow>
-                <TextView
-                    android:text="Player"
-                    android:layout_width="100dp"
-                    android:textSize="20dp"
-                    android:padding="3dip"
-                    android:textColor="@color/main_color"
-                    android:gravity="center"/>
-                <TextView
-                    android:text="P"
-                    android:layout_width="50dp"
-                    android:textColor="@color/main_color"
-                    android:textSize="20dp"
-                    android:gravity="center"
-                    android:padding="3dip" />
-                <TextView
-                    android:text="A(%)"
-                    android:layout_width="50dp"
-                    android:textColor="@color/main_color"
-                    android:textSize="20dp"
-                    android:gravity="center"
-                    android:padding="3dip" />
-                <TextView
-                    android:text="B"
-                    android:layout_width="50dp"
-                    android:textColor="@color/main_color"
-                    android:textSize="20dp"
-                    android:gravity="center"
-                    android:padding="3dip" />
-                <TextView
-                    android:text="R(%)"
-                    android:layout_width="50dp"
-                    android:textColor="@color/main_color"
-                    android:textSize="20dp"
-                    android:gravity="center"
-                    android:padding="3dip" />
-                <TextView
-                    android:text="S"
-                    android:layout_width="50dp"
-                    android:textColor="@color/main_color"
-                    android:textSize="20dp"
-                    android:gravity="center"
-                    android:padding="3dip" />
-            </TableRow>
+            <TableLayout
+                android:id="@+id/statsTable"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="20dp"
+                android:padding="5dp">
 
-        </TableLayout>
+                <TableRow
+                    android:background="@color/main_color">
+
+                    <TextView
+                        android:background="@drawable/textview_border_tittles"
+                        android:layout_width="100dp"
+                        android:gravity="center"
+                        android:padding="3dip"
+                        android:text="Player"
+
+                        android:textColor="@color/yellow"
+                        android:textSize="20dp" />
+
+                    <TextView
+                        android:background="@drawable/textview_border_tittles"
+                        android:layout_width="50dp"
+                        android:gravity="center"
+                        android:padding="3dip"
+                        android:text="P"
+                        android:textColor="@color/yellow"
+                        android:textSize="20dp" />
+
+                    <TextView
+                        android:background="@drawable/textview_border_tittles"
+                        android:layout_width="50dp"
+                        android:gravity="center"
+                        android:padding="3dip"
+                        android:text="A(%)"
+                        android:textColor="@color/yellow"
+                        android:textSize="20dp" />
+
+                    <TextView
+                        android:background="@drawable/textview_border_tittles"
+                        android:layout_width="50dp"
+                        android:gravity="center"
+                        android:padding="3dip"
+                        android:text="B"
+                        android:textColor="@color/yellow"
+                        android:textSize="20dp" />
+
+                    <TextView
+                        android:background="@drawable/textview_border_tittles"
+                        android:layout_width="50dp"
+                        android:gravity="center"
+                        android:padding="3dip"
+                        android:text="R(%)"
+                        android:textColor="@color/yellow"
+                        android:textSize="20dp" />
+
+                    <TextView
+                        android:background="@drawable/textview_border_tittles"
+                        android:layout_width="50dp"
+                        android:gravity="center"
+                        android:padding="3dip"
+                        android:text="S"
+                        android:textColor="@color/yellow"
+                        android:textSize="20dp" />
+                </TableRow>
+
+            </TableLayout>
 
         </RelativeLayout>
     </ScrollView>
