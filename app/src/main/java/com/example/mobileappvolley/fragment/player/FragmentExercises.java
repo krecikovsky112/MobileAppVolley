@@ -50,7 +50,6 @@ public class FragmentExercises extends Fragment {
         }
     }
 
-    //TODO: Do zrobienia po stronie playera
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

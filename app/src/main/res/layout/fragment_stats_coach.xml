@@ -23,7 +23,9 @@
                 android:layout_height="match_parent"
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="20dp"
-                android:padding="5dp">
+                android:layout_marginEnd="5dp"
+                android:layout_marginStart="5dp"
+                >
 
                 <TableRow
                     android:background="@color/main_color">
@@ -32,7 +34,7 @@
                         android:background="@drawable/textview_border_tittles"
                         android:layout_width="100dp"
                         android:gravity="center"
-                        android:padding="3dip"
+
                         android:text="Player"
 
                         android:textColor="@color/yellow"
@@ -42,7 +44,6 @@
                         android:background="@drawable/textview_border_tittles"
                         android:layout_width="50dp"
                         android:gravity="center"
-                        android:padding="3dip"
                         android:text="P"
                         android:textColor="@color/yellow"
                         android:textSize="20dp" />
@@ -51,7 +52,6 @@
                         android:background="@drawable/textview_border_tittles"
                         android:layout_width="50dp"
                         android:gravity="center"
-                        android:padding="3dip"
                         android:text="A(%)"
                         android:textColor="@color/yellow"
                         android:textSize="20dp" />
@@ -60,7 +60,6 @@
                         android:background="@drawable/textview_border_tittles"
                         android:layout_width="50dp"
                         android:gravity="center"
-                        android:padding="3dip"
                         android:text="B"
                         android:textColor="@color/yellow"
                         android:textSize="20dp" />
@@ -69,7 +68,6 @@
                         android:background="@drawable/textview_border_tittles"
                         android:layout_width="50dp"
                         android:gravity="center"
-                        android:padding="3dip"
                         android:text="R(%)"
                         android:textColor="@color/yellow"
                         android:textSize="20dp" />
@@ -78,7 +76,6 @@
                         android:background="@drawable/textview_border_tittles"
                         android:layout_width="50dp"
                         android:gravity="center"
-                        android:padding="3dip"
                         android:text="S"
                         android:textColor="@color/yellow"
                         android:textSize="20dp" />
@@ -86,8 +83,17 @@
 
             </TableLayout>
 
-        </RelativeLayout>
-    </ScrollView>
+            <ImageButton
+                android:id="@+id/createStatisticButton"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="300dp"
+                android:layout_marginTop="480dp"
+                android:background="@drawable/button_login"
+                android:src="@drawable/ic_baseline_create_24" />
+             </RelativeLayout>
 
+
+    </ScrollView>
 
 </layout>

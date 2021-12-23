@@ -283,6 +283,15 @@
                 </TableRow>
             </TableLayout>
 
+            <ImageButton
+                android:id="@+id/createStatisticButton"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="900dp"
+                android:layout_marginTop="480dp"
+                android:background="@drawable/button_login"
+                android:src="@drawable/ic_baseline_create_48" />
+
         </RelativeLayout>
     </ScrollView>
 

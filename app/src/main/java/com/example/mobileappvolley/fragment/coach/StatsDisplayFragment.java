@@ -3,9 +3,11 @@ package com.example.mobileappvolley.fragment.coach;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -16,6 +18,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
@@ -45,6 +49,7 @@ public class StatsDisplayFragment extends Fragment {
     private ArrayList<String> idPlayer = new ArrayList<>();
     private int counter = 0;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -61,6 +66,13 @@ public class StatsDisplayFragment extends Fragment {
         }
 
 //        addData();
+
+        fragmentStatsCoachBinding.createStatisticButton.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+
+            }
+        });
 
         return view;
     }
@@ -178,7 +190,7 @@ public class StatsDisplayFragment extends Fragment {
         textView.setGravity(View.TEXT_ALIGNMENT_CENTER);
         textView.setText(part);
         textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-        textView.setTextColor(Color.parseColor("#17358b"));
+        textView.setTextColor(Color.parseColor("#fdbc00"));
         if(isTablet(getContext())){
             textView.setTextSize(25);
         }
@@ -305,13 +317,13 @@ public class StatsDisplayFragment extends Fragment {
     private void setTextViewAttributes(TextView textView) {
         textView.setGravity(View.TEXT_ALIGNMENT_CENTER);
         textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-        textView.setTextColor(Color.parseColor("#17358b"));
+        textView.setTextColor(Color.parseColor("#fdbc00"));
         textView.setBackgroundResource(R.drawable.textview_border_tittles);
         if(isTablet(getContext())){
             textView.setTextSize(25);
         }
         else{
-            textView.setTextSize(18);
+            textView.setTextSize(20);
         }
 
     }
