@@ -1,6 +1,7 @@
 package com.example.mobileappvolley.fragment.coach;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Build;
@@ -25,6 +26,8 @@ import androidx.fragment.app.Fragment;
 
 import com.example.mobileappvolley.Model.Statistic;
 import com.example.mobileappvolley.R;
+import com.example.mobileappvolley.activity.MainActivity;
+import com.example.mobileappvolley.activity.StatsActivity;
 import com.example.mobileappvolley.databinding.FragmentStatsCoachBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
@@ -65,14 +68,14 @@ public class StatsDisplayFragment extends Fragment {
             leadDataStatsPhone();
         }
 
-//        addData();
-
-        fragmentStatsCoachBinding.createStatisticButton.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        fragmentStatsCoachBinding.createStatisticButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), StatsActivity.class));
             }
         });
+
+//        addData();
 
         return view;
     }

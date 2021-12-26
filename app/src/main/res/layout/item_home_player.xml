@@ -6,6 +6,7 @@
         android:layout_margin="2dp"
         >
         <LinearLayout
+            android:id="@+id/backgroundPlayerViewHolder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -34,6 +35,7 @@
                     android:textSize="18sp" />
 
                 <ImageView
+                    android:id="@+id/shirtImageView"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
                     android:layout_alignParentStart="true"

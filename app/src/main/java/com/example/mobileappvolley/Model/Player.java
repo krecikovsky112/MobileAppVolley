@@ -1,6 +1,8 @@
 package com.example.mobileappvolley.Model;
 
-public class Player {
+import java.io.Serializable;
+
+public class Player implements Serializable {
     private int id;
     private String name;
     private int age;
@@ -10,6 +12,11 @@ public class Player {
     private String position;
     private int weight;
     private String idUser;
+    private boolean isChecked = false;
+
+    public void setChecked(boolean checked) {
+        isChecked = checked;
+    }
 
     public int getId() {
         return id;
@@ -81,5 +88,9 @@ public class Player {
 
     public void setIdUser(String idUser) {
         this.idUser = idUser;
+    }
+
+    public boolean isChecked() {
+        return isChecked;
     }
 }
