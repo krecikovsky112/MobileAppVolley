@@ -11,6 +11,7 @@ import com.example.mobileappvolley.R;
 import com.example.mobileappvolley.RecyclerViewAdapter;
 import com.example.mobileappvolley.RecyclerViewAdapterStats;
 import com.example.mobileappvolley.databinding.ActivityStatsBinding;
+import com.example.mobileappvolley.fragment.coach.PlayerStatsFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -38,6 +39,10 @@ public class StatsActivity extends AppCompatActivity {
         recyclerViewAdapter = new RecyclerViewAdapterStats(this);
         activityStatsBinding.homeRecyclerView.setAdapter(recyclerViewAdapter);
         leadData();
+
+        PlayerStatsFragment myFragment = new PlayerStatsFragment();
+        this.getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, myFragment).addToBackStack("okj").commit();
+
     }
 
     private void leadData() {

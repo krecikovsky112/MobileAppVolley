@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.mobileappvolley.Model.Player;
 import com.example.mobileappvolley.ViewHolder.Coach.PlayerViewHolder;
 import com.example.mobileappvolley.fragment.coach.PlayerFragment;
+import com.example.mobileappvolley.fragment.coach.PlayerStatsFragment;
 
 import java.util.ArrayList;
 
@@ -55,7 +56,6 @@ public class RecyclerViewAdapterStats extends RecyclerView.Adapter<RecyclerView.
             } else {
                 setItemView(playerViewHolder,false);
             }
-
         }
 
         holder.itemView.setOnClickListener(view -> {
@@ -65,6 +65,9 @@ public class RecyclerViewAdapterStats extends RecyclerView.Adapter<RecyclerView.
                 selectedPosition = holder.getAdapterPosition();
             }
 
+            AppCompatActivity activity = (AppCompatActivity) view.getContext();
+            PlayerStatsFragment myFragment = new PlayerStatsFragment();
+            activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, myFragment).addToBackStack("okj").commit();
         });
     }
 
