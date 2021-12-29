@@ -1,7 +1,24 @@
 package com.example.mobileappvolley.Model;
 
-public class Statistic {
-    private Long allAttack;
+public class Statistic{
+    private Long allAttack = 0L;
+    private Long blockAttack = 0L;
+    private Long errorAttack = 0L;
+    private Long perfAttack = 0L;
+    private Long perfAttackPerc = 0L;
+    private Long allBlock = 0L;
+    private int points = 0;
+    private Long allReceive = 0L;
+    private Long errorReceive = 0L;
+    private Long negativeReceive = 0L;
+    private Long perfReceive = 0L;
+    private Long perfReceivePerc = 0L;
+    private Long positiveReceive = 0L;
+    private Long positiveReceivePerc = 0L;
+    private Long allServe = 0L;
+    private Long aceServe = 0L;
+    private Long errorServe = 0L;
+    private String idPlayer;
 
     public Long getAllAttack() {
         return allAttack;
@@ -139,20 +156,12 @@ public class Statistic {
         this.errorServe = errorServe;
     }
 
-    private Long blockAttack;
-    private Long errorAttack;
-    private Long perfAttack;
-    private Long perfAttackPerc;
-    private Long allBlock;
-    private int points;
-    private Long allReceive;
-    private Long errorReceive;
-    private Long negativeReceive;
-    private Long perfReceive;
-    private Long perfReceivePerc;
-    private Long positiveReceive;
-    private Long positiveReceivePerc;
-    private Long allServe;
-    private Long aceServe;
-    private Long errorServe;
+
+    public String getIdPlayer() {
+        return idPlayer;
+    }
+
+    public void setIdPlayer(String idPlayer) {
+        this.idPlayer = idPlayer;
+    }
 }

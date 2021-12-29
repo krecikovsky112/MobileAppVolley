@@ -6,21 +6,29 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.ListFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mobileappvolley.Model.Player;
+import com.example.mobileappvolley.Model.Statistic;
 import com.example.mobileappvolley.ViewHolder.Coach.PlayerViewHolder;
 import com.example.mobileappvolley.fragment.coach.PlayerFragment;
 import com.example.mobileappvolley.fragment.coach.PlayerStatsFragment;
 
 import java.util.ArrayList;
 
+import javax.xml.parsers.FactoryConfigurationError;
+
 public class RecyclerViewAdapterStats extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context context;
     private ArrayList<Player> playerArrayList = new ArrayList<>();
+    private ArrayList<Statistic> statisticArrayList = new ArrayList<>();
     private int selectedPosition = 0;
 
     public RecyclerViewAdapterStats(Context context) {
@@ -49,37 +57,38 @@ public class RecyclerViewAdapterStats extends RecyclerView.Adapter<RecyclerView.
         playerViewHolder.playerPosition.setText(player.getPosition());
 
         if (selectedPosition == -1) {
-            setItemView(playerViewHolder,false);
+            setItemView(playerViewHolder, false);
         } else {
             if (selectedPosition == holder.getAdapterPosition()) {
-                setItemView(playerViewHolder,true);
+                setItemView(playerViewHolder, true);
             } else {
-                setItemView(playerViewHolder,false);
+                setItemView(playerViewHolder, false);
             }
         }
 
         holder.itemView.setOnClickListener(view -> {
-            setItemView(playerViewHolder,true);
+            setItemView(playerViewHolder, true);
             if (selectedPosition != holder.getAdapterPosition()) {
                 notifyItemChanged(selectedPosition);
                 selectedPosition = holder.getAdapterPosition();
             }
 
             AppCompatActivity activity = (AppCompatActivity) view.getContext();
-            PlayerStatsFragment myFragment = new PlayerStatsFragment();
-            activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, myFragment).addToBackStack("okj").commit();
+            Fragment fragment = activity.getSupportFragmentManager().findFragmentByTag(player.getIdUser());
+            if (fragment != null && fragment.getTag().equals(player.getIdUser())) {
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).addToBackStack(null).commit();
+            }
         });
     }
 
-    private void setItemView(PlayerViewHolder playerViewHolder,boolean isSelected) {
-        if(!isSelected){
+    private void setItemView(PlayerViewHolder playerViewHolder, boolean isSelected) {
+        if (!isSelected) {
             playerViewHolder.backgroundPlayerViewHolder.setBackgroundColor(Color.parseColor("#17358b"));
             playerViewHolder.playerNumber.setTextColor(Color.parseColor("#ffffff"));
             playerViewHolder.playerTittle.setTextColor(Color.parseColor("#ffffff"));
             playerViewHolder.playerPosition.setTextColor(Color.parseColor("#ffffff"));
             playerViewHolder.shirtImageView.setColorFilter(Color.parseColor("#ffffff"));
-        }
-        else{
+        } else {
             playerViewHolder.backgroundPlayerViewHolder.setBackgroundColor(Color.parseColor("#fdbc00"));
             playerViewHolder.playerNumber.setTextColor(Color.parseColor("#17358b"));
             playerViewHolder.playerTittle.setTextColor(Color.parseColor("#17358b"));
