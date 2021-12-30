@@ -64,18 +64,17 @@ public class StatsDisplayFragment extends Fragment {
         boolean isTablet = isTablet(getContext());
         if (isTablet) {
             leadDataStatsTablet();
+            fragmentStatsCoachBinding.createStatisticButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(getActivity(), StatsActivity.class));
+                }
+            });
         } else {
             leadDataStatsPhone();
         }
 
-        fragmentStatsCoachBinding.createStatisticButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getActivity(), StatsActivity.class));
-            }
-        });
 
-//        addData();
 
         return view;
     }
@@ -209,7 +208,7 @@ public class StatsDisplayFragment extends Fragment {
         setTextViewAttributes(textView);
         tr.addView(textView);
 
-        if (statistics.get(finalI).getAllAttack() != null) {
+        if (isTablet(getContext())) {
 
             textView = new TextView(getActivity());
             textView.setText(String.valueOf(statistics.get(finalI).getAllAttack()));
