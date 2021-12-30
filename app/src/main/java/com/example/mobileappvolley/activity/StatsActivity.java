@@ -1,15 +1,13 @@
 package com.example.mobileappvolley.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentResultListener;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -19,11 +17,11 @@ import com.example.mobileappvolley.R;
 import com.example.mobileappvolley.RecyclerViewAdapterStats;
 import com.example.mobileappvolley.databinding.ActivityStatsBinding;
 import com.example.mobileappvolley.fragment.coach.PlayerStatsFragment;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -38,6 +36,7 @@ public class StatsActivity extends AppCompatActivity implements PlayerStatsFragm
     ArrayList<Player> players = new ArrayList<>();
     private RecyclerViewAdapterStats recyclerViewAdapter;
     private PlayerStatsFragment playerStatsFragment;
+    private ArrayList<String> idDocumentsToDelete = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,15 +52,14 @@ public class StatsActivity extends AppCompatActivity implements PlayerStatsFragm
         activityStatsBinding.homeRecyclerView.setAdapter(recyclerViewAdapter);
         leadData();
 
-
         activityStatsBinding.sendDataButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FirebaseFirestore db = FirebaseFirestore.getInstance();
-
                 CollectionReference ref = db.collection("Stats");
+                deleteAllDocumentsFromCollection(ref);
+
                 for(int i = 0;i< players.size();i++){
-                   //TODO: Dodać usuwanie statystyk
                     Map<String, Object> statistic = new HashMap<>();
                     PlayerStatsFragment fragment = (PlayerStatsFragment) getSupportFragmentManager().findFragmentByTag(players.get(i).getIdUser());
                     if (fragment != null && fragment.getTag().equals(players.get(i).getIdUser())) {
@@ -101,10 +99,31 @@ public class StatsActivity extends AppCompatActivity implements PlayerStatsFragm
                         db.collection("Stats").add(statistic);
 
                         System.out.println("Add values!");
+
+                        startActivity(new Intent(getApplicationContext(), MainActivityCoach.class));
                     }
                 }
             }
         });
+    }
+
+    void deleteAllDocumentsFromCollection(CollectionReference collection) {
+        try {
+            collection.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if(task.isSuccessful()){
+                        for(QueryDocumentSnapshot documentSnapshot : task.getResult()){
+                            idDocumentsToDelete.add(documentSnapshot.getId());
+
+                            collection.document(documentSnapshot.getId()).delete();
+                        }
+                    }
+                }
+            });
+        } catch (Exception e) {
+            System.err.println("Error deleting collection : " + e.getMessage());
+        }
     }
 
     private void leadData() {
