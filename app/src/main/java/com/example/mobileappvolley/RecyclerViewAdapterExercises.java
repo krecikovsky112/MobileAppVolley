@@ -48,9 +48,9 @@ public class RecyclerViewAdapterExercises extends RecyclerView.Adapter<RecyclerV
         }
         exerciseViewHolder.typeTextview.setText(temp);
         if(exercise.isUrgent())
-            exerciseViewHolder.alarmImage.setBackgroundResource(R.drawable.alarm_red);
+            exerciseViewHolder.alarmImage.setBackgroundResource(R.drawable.ic_baseline_warning_24);
         else
-            exerciseViewHolder.alarmImage.setBackgroundResource(R.drawable.alarm_white);
+            exerciseViewHolder.alarmImage.setBackgroundResource(R.drawable.ic_baseline_warning_white);
 
 
         holder.itemView.setOnClickListener(view -> {

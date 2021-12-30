@@ -20,7 +20,7 @@ import com.example.mobileappvolley.databinding.FragmentLoginBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class FragmentLogin extends Fragment {
+public class FragmentLogin extends Fragment{
     private FragmentLoginBinding loginFragmentBinding;
     private static final int RC_SIGN_IN = 100;
     private FirebaseAuth firebaseAuth;
@@ -44,6 +44,7 @@ public class FragmentLogin extends Fragment {
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
         if (firebaseUser != null) {
             startActivity(new Intent(getActivity(), MainActivity.class));
+            getActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         }
     }
 
@@ -52,6 +53,7 @@ public class FragmentLogin extends Fragment {
                 .addOnCompleteListener(getActivity(), task -> {
                     if (task.isSuccessful()) {
                         startActivity(new Intent(getActivity(), MainActivity.class));
+                        getActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                     } else {
                         Toast.makeText(getActivity(), "Failure", Toast.LENGTH_LONG).show();
                     }

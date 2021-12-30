@@ -44,27 +44,24 @@ public class MainActivityCoach extends AppCompatActivity {
             if (i == R.id.home) {
                 FragmentHomeCoach myFragment = new FragmentHomeCoach();
                 this.getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, myFragment).addToBackStack("okj").commit();
-
             } else if (i == R.id.creator) {
                 TrainingCreatorFragment myFragment = new TrainingCreatorFragment();
                 this.getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, myFragment).addToBackStack("okj").commit();
             } else if (i == R.id.exercises) {
                 FragmentExercises myFragment = new FragmentExercises();
                 this.getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, myFragment).addToBackStack("okj").commit();
-            }
-            else if(i == R.id.notifications){
+            } else if (i == R.id.notifications) {
                 FragmentNotifications myFragment = new FragmentNotifications();
                 this.getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, myFragment).addToBackStack("okj").commit();
-            }
-            else if(i == R.id.stats){
+            } else if (i == R.id.stats) {
                 StatsDisplayFragment myFragment = new StatsDisplayFragment();
-                this.getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,myFragment).addToBackStack("okj").commit();
+                this.getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, myFragment).addToBackStack("okj").commit();
             }
         });
     }
 
     public void addFragmentHomeCoach() {
-        activityCoachBinding.navigationbar.setItemSelected(R.id.home,true);
+        activityCoachBinding.navigationbar.setItemSelected(R.id.home, true);
         FragmentHomeCoach fragment = new FragmentHomeCoach();
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
@@ -78,7 +75,8 @@ public class MainActivityCoach extends AppCompatActivity {
             startActivity(new Intent(this, AuthActivity.class));
         }
     }
-    public void changeToHomeNavigation(){
-        activityCoachBinding.navigationbar.setItemSelected(R.id.home,true);
+
+    public void changeToHomeNavigation() {
+        activityCoachBinding.navigationbar.setItemSelected(R.id.home, true);
     }
 }
