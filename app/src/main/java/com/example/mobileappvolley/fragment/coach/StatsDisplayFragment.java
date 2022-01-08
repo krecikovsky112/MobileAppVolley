@@ -29,6 +29,7 @@ import com.example.mobileappvolley.R;
 import com.example.mobileappvolley.activity.MainActivity;
 import com.example.mobileappvolley.activity.StatsActivity;
 import com.example.mobileappvolley.databinding.FragmentStatsCoachBinding;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.EventListener;
@@ -45,12 +46,31 @@ import java.util.Objects;
 
 
 public class StatsDisplayFragment extends Fragment {
+    private static final String ARG_PARAM1 = "matchDate";
     private FragmentStatsCoachBinding fragmentStatsCoachBinding;
     private FirebaseAuth firebaseAuth;
+    private Timestamp matchDate;
 
     private ArrayList<Statistic> statistics = new ArrayList<>();
     private ArrayList<String> idPlayer = new ArrayList<>();
     private int counter = 0;
+
+    public static StatsDisplayFragment newInstance(String param1){
+        StatsDisplayFragment fragment = new StatsDisplayFragment();
+        Bundle args = new Bundle();
+        args.putString(ARG_PARAM1, param1);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    //TODO: Do zaimplementowania przekazywanie timeStamp
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+//            matchDate = getArguments().ge(ARG_PARAM1);
+        }
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Nullable

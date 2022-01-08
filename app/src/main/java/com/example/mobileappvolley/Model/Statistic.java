@@ -1,6 +1,8 @@
 package com.example.mobileappvolley.Model;
 
-public class Statistic{
+import com.google.firebase.Timestamp;
+
+public class Statistic {
     private Long allAttack = 0L;
     private Long blockAttack = 0L;
     private Long errorAttack = 0L;
@@ -19,6 +21,16 @@ public class Statistic{
     private Long aceServe = 0L;
     private Long errorServe = 0L;
     private String idPlayer;
+    private Timestamp matchDate;
+
+
+    public Timestamp getMatchDate() {
+        return matchDate;
+    }
+
+    public void setMatchDate(Timestamp matchDate) {
+        this.matchDate = matchDate;
+    }
 
     public Long getAllAttack() {
         return allAttack;

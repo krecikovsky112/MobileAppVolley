@@ -13,6 +13,7 @@ import com.example.mobileappvolley.R;
 import com.example.mobileappvolley.databinding.ActivityCoachBinding;
 import com.example.mobileappvolley.fragment.coach.FragmentExercises;
 import com.example.mobileappvolley.fragment.coach.FragmentHomeCoach;
+import com.example.mobileappvolley.fragment.coach.FragmentMatchDateStats;
 import com.example.mobileappvolley.fragment.coach.FragmentNotifications;
 import com.example.mobileappvolley.fragment.coach.StatsDisplayFragment;
 import com.example.mobileappvolley.fragment.coach.TrainingCreatorFragment;
@@ -54,9 +55,9 @@ public class MainActivityCoach extends AppCompatActivity {
                 FragmentNotifications myFragment = new FragmentNotifications();
                 this.getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, myFragment).addToBackStack("okj").commit();
             } else if (i == R.id.stats) {
-                StatsDisplayFragment myFragment = new StatsDisplayFragment();
+                FragmentMatchDateStats myFragment = new FragmentMatchDateStats();
                 this.getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, myFragment).addToBackStack("okj").commit();
-            }
+ }
         });
     }
 
