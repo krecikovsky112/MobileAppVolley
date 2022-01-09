@@ -21,16 +21,7 @@ public class Statistic {
     private Long aceServe = 0L;
     private Long errorServe = 0L;
     private String idPlayer;
-    private Timestamp matchDate;
-
-
-    public Timestamp getMatchDate() {
-        return matchDate;
-    }
-
-    public void setMatchDate(Timestamp matchDate) {
-        this.matchDate = matchDate;
-    }
+    private Long matchDate = 0L;
 
     public Long getAllAttack() {
         return allAttack;
@@ -175,5 +166,13 @@ public class Statistic {
 
     public void setIdPlayer(String idPlayer) {
         this.idPlayer = idPlayer;
+    }
+
+    public Long getMatchDate() {
+        return matchDate;
+    }
+
+    public void setMatchDate(Long matchDate) {
+        this.matchDate = matchDate;
     }
 }

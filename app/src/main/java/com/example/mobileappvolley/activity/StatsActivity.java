@@ -19,6 +19,7 @@ import com.example.mobileappvolley.databinding.ActivityStatsBinding;
 import com.example.mobileappvolley.fragment.coach.PlayerStatsFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -95,6 +96,8 @@ public class StatsActivity extends AppCompatActivity implements PlayerStatsFragm
                         Map<String, Object> block = new HashMap<>();
                         block.put("all", tempStatistic.getAllBlock());
                         statistic.put("block", block);
+
+                        statistic.put("matchDate",Timestamp.now().getSeconds());
 
                         db.collection("Stats").add(statistic);
 

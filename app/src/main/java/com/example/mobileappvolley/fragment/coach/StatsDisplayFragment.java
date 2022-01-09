@@ -38,7 +38,9 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.type.DateTime;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -49,16 +51,16 @@ public class StatsDisplayFragment extends Fragment {
     private static final String ARG_PARAM1 = "matchDate";
     private FragmentStatsCoachBinding fragmentStatsCoachBinding;
     private FirebaseAuth firebaseAuth;
-    private Timestamp matchDate;
+    private long matchDate;
 
     private ArrayList<Statistic> statistics = new ArrayList<>();
     private ArrayList<String> idPlayer = new ArrayList<>();
     private int counter = 0;
 
-    public static StatsDisplayFragment newInstance(String param1){
+    public static StatsDisplayFragment newInstance(Long param1){
         StatsDisplayFragment fragment = new StatsDisplayFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
+        args.putLong(ARG_PARAM1, param1);
         fragment.setArguments(args);
         return fragment;
     }
@@ -68,7 +70,7 @@ public class StatsDisplayFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-//            matchDate = getArguments().ge(ARG_PARAM1);
+            matchDate = getArguments().getLong(ARG_PARAM1);
         }
     }
 
@@ -108,7 +110,8 @@ public class StatsDisplayFragment extends Fragment {
     private void leadDataStatsTablet() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference ref = db.collection("Stats");
-        ref.addSnapshotListener((value, error) -> {
+        Query query = ref.whereEqualTo("matchDate",matchDate);
+        query.addSnapshotListener((value, error) -> {
             if (error == null) {
                 for (QueryDocumentSnapshot document : value) {
                     Statistic statistic = new Statistic();
@@ -153,7 +156,8 @@ public class StatsDisplayFragment extends Fragment {
     private void leadDataStatsPhone() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference ref = db.collection("Stats");
-        ref.addSnapshotListener((value, error) -> {
+        Query query = ref.whereEqualTo("matchDate",matchDate);
+        query.addSnapshotListener((value, error) -> {
             if (error == null) {
                 for (QueryDocumentSnapshot document : value) {
 

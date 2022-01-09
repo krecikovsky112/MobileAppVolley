@@ -32,17 +32,6 @@ public class PlayerStatsFragment extends Fragment {
         void send(Statistic statistic);
     }
 
-//    public interface myDataBack {
-//        public void bringBack(Long attackBlock);
-//    }
-
-//    @Override
-//    public void onAttach(@NonNull Context context) {
-//        super.onAttach(context);
-//        mContext = context;
-//        mCallback = (Listener) mContext;
-//    }
-
     public static PlayerStatsFragment newInstance(String param1) {
         PlayerStatsFragment fragment = new PlayerStatsFragment();
         Bundle args = new Bundle();

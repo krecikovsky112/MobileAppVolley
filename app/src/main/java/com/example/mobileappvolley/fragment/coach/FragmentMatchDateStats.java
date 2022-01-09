@@ -58,11 +58,12 @@ public class FragmentMatchDateStats extends Fragment {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference ref = db.collection("HistoryMatches");
 
-        Query query = ref.orderBy("matchDate", Query.Direction.ASCENDING);
+        Query query = ref.orderBy("matchDate", Query.Direction.DESCENDING);
 
         query.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                matchDateArrayList.clear();
                 if (error == null) {
                     for (QueryDocumentSnapshot document : value) {
                         MatchDate matchDate = new MatchDate();

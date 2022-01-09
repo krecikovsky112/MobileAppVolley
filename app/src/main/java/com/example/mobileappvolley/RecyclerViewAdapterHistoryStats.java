@@ -43,7 +43,7 @@ public class RecyclerViewAdapterHistoryStats extends RecyclerView.Adapter<Recycl
 
         holder.itemView.setOnClickListener(v -> {
                 AppCompatActivity activity = (AppCompatActivity) v.getContext();
-                StatsDisplayFragment myFragment = new StatsDisplayFragment();
+                StatsDisplayFragment myFragment = StatsDisplayFragment.newInstance(matchDate.getMatchDate().getSeconds());
                 activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, myFragment).addToBackStack("okj").commit();
 
         });
