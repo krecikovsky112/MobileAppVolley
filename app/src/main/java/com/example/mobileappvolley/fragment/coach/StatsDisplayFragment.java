@@ -65,7 +65,6 @@ public class StatsDisplayFragment extends Fragment {
         return fragment;
     }
 
-    //TODO: Do zaimplementowania przekazywanie timeStamp
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,8 +94,6 @@ public class StatsDisplayFragment extends Fragment {
         } else {
             leadDataStatsPhone();
         }
-
-
 
         return view;
     }

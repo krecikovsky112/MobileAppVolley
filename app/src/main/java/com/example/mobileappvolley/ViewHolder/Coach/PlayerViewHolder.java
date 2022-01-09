@@ -14,18 +14,20 @@ import com.example.mobileappvolley.R;
 
 public class PlayerViewHolder extends RecyclerView.ViewHolder {
     public TextView playerTittle;
-    public TextView playerNumber;
+//    public TextView playerNumber;
     public TextView playerPosition;
     public LinearLayout backgroundPlayerViewHolder;
-    public ImageView shirtImageView;
+//    public ImageView shirtImageView;
+    public ImageView photo;
 
     public PlayerViewHolder(@NonNull View itemView) {
         super(itemView);
         playerTittle = itemView.findViewById(R.id.playerTittle);
-        playerNumber = itemView.findViewById(R.id.number);
+//        playerNumber = itemView.findViewById(R.id.number);
         playerPosition = itemView.findViewById(R.id.playerPosition);
         backgroundPlayerViewHolder = itemView.findViewById(R.id.backgroundPlayerViewHolder);
-        shirtImageView = itemView.findViewById(R.id.shirtImageView);
+//        shirtImageView = itemView.findViewById(R.id.shirtImageView);
+        photo = itemView.findViewById(R.id.photo);
     }
 
 }

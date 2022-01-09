@@ -9,15 +9,20 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.mobileappvolley.Model.Player;
 import com.example.mobileappvolley.ViewHolder.Coach.PlayerViewHolder;
 import com.example.mobileappvolley.fragment.coach.PlayerFragment;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  {
     private Context context;
     private ArrayList<Player> playerArrayList =  new ArrayList<>();
+    FirebaseStorage storage = FirebaseStorage.getInstance();
+    StorageReference storageRef = storage.getReference();
 
     public RecyclerViewAdapter(Context context) {
         this.context = context;
@@ -40,8 +45,16 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         PlayerViewHolder playerViewHolder = (PlayerViewHolder) holder;
         Player player = playerArrayList.get(position);
         playerViewHolder.playerTittle.setText(player.getName());
-        playerViewHolder.playerNumber.setText(String.valueOf(player.getId()));
+//        playerViewHolder.playerNumber.setText(String.valueOf(player.getId()));
         playerViewHolder.playerPosition.setText(player.getPosition());
+//            StorageReference storageReference = storageRef.child("images/Snapchat-411991285.jpg");
+//
+//
+//            // Download directly from StorageReference using Glide
+//            // (See MyAppGlideModule for Loader registration)
+//            Glide.with(context)
+//                    .load(storageReference)
+//                    .into(playerViewHolder.photo);
 
         holder.itemView.setOnClickListener(view -> {
             AppCompatActivity activity = (AppCompatActivity) view.getContext();

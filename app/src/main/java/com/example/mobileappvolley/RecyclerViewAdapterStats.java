@@ -53,7 +53,7 @@ public class RecyclerViewAdapterStats extends RecyclerView.Adapter<RecyclerView.
         PlayerViewHolder playerViewHolder = (PlayerViewHolder) holder;
         Player player = playerArrayList.get(position);
         playerViewHolder.playerTittle.setText(player.getName());
-        playerViewHolder.playerNumber.setText(String.valueOf(player.getId()));
+//        playerViewHolder.playerNumber.setText(String.valueOf(player.getId()));
         playerViewHolder.playerPosition.setText(player.getPosition());
 
         if (selectedPosition == -1) {
@@ -84,16 +84,16 @@ public class RecyclerViewAdapterStats extends RecyclerView.Adapter<RecyclerView.
     private void setItemView(PlayerViewHolder playerViewHolder, boolean isSelected) {
         if (!isSelected) {
             playerViewHolder.backgroundPlayerViewHolder.setBackgroundColor(Color.parseColor("#17358b"));
-            playerViewHolder.playerNumber.setTextColor(Color.parseColor("#ffffff"));
+//            playerViewHolder.playerNumber.setTextColor(Color.parseColor("#ffffff"));
             playerViewHolder.playerTittle.setTextColor(Color.parseColor("#ffffff"));
             playerViewHolder.playerPosition.setTextColor(Color.parseColor("#ffffff"));
-            playerViewHolder.shirtImageView.setColorFilter(Color.parseColor("#ffffff"));
+//            playerViewHolder.shirtImageView.setColorFilter(Color.parseColor("#ffffff"));
         } else {
             playerViewHolder.backgroundPlayerViewHolder.setBackgroundColor(Color.parseColor("#fdbc00"));
-            playerViewHolder.playerNumber.setTextColor(Color.parseColor("#17358b"));
+//            playerViewHolder.playerNumber.setTextColor(Color.parseColor("#17358b"));
             playerViewHolder.playerTittle.setTextColor(Color.parseColor("#17358b"));
             playerViewHolder.playerPosition.setTextColor(Color.parseColor("#17358b"));
-            playerViewHolder.shirtImageView.setColorFilter(Color.parseColor("#17358b"));
+//            playerViewHolder.shirtImageView.setColorFilter(Color.parseColor("#17358b"));
         }
 
     }
