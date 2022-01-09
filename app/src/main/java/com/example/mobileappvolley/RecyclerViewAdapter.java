@@ -13,6 +13,8 @@ import com.bumptech.glide.Glide;
 import com.example.mobileappvolley.Model.Player;
 import com.example.mobileappvolley.ViewHolder.Coach.PlayerViewHolder;
 import com.example.mobileappvolley.fragment.coach.PlayerFragment;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -47,14 +49,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         playerViewHolder.playerTittle.setText(player.getName());
 //        playerViewHolder.playerNumber.setText(String.valueOf(player.getId()));
         playerViewHolder.playerPosition.setText(player.getPosition());
-//            StorageReference storageReference = storageRef.child("images/Snapchat-411991285.jpg");
-//
-//
-//            // Download directly from StorageReference using Glide
-//            // (See MyAppGlideModule for Loader registration)
-//            Glide.with(context)
-//                    .load(storageReference)
-//                    .into(playerViewHolder.photo);
+            StorageReference storageReference = storageRef.child("Snapchat-411991285.jpg");
+
+            //TODO: do poprawienia implementacja bo nie działa
+        Glide.with(context)
+                .load(storageReference)
+                .into(playerViewHolder.photo);
 
         holder.itemView.setOnClickListener(view -> {
             AppCompatActivity activity = (AppCompatActivity) view.getContext();
