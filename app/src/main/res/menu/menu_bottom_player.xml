@@ -27,12 +27,12 @@
         app:cnb_iconColor="#fff"
         app:cnb_textColor="#fff"
         />
-    <item
-        android:id="@+id/stats"
-        android:title="Stats"
-        android:icon="@drawable/volleyball"
-        app:cnb_backgroundColor="#17358b"
-        app:cnb_iconColor="#fff"
-        app:cnb_textColor="#fff"
-        />
+<!--    <item-->
+<!--        android:id="@+id/stats"-->
+<!--        android:title="Stats"-->
+<!--        android:icon="@drawable/volleyball"-->
+<!--        app:cnb_backgroundColor="#17358b"-->
+<!--        app:cnb_iconColor="#fff"-->
+<!--        app:cnb_textColor="#fff"-->
+<!--        />-->
 </menu>

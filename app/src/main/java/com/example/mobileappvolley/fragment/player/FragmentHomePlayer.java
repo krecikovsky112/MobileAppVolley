@@ -15,6 +15,7 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
+import com.example.mobileappvolley.GlideApp;
 import com.example.mobileappvolley.activity.AuthActivity;
 import com.example.mobileappvolley.R;
 import com.example.mobileappvolley.databinding.FragmentHomePlayerBinding;
@@ -25,12 +26,15 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 public class FragmentHomePlayer extends Fragment {
     private FragmentHomePlayerBinding fragmentHomePlayerBinding;
     private FirebaseAuth firebaseAuth;
     private FirebaseUser firebaseUser;
     private Integer positionId;
+    FirebaseStorage storage = FirebaseStorage.getInstance();
 
     @Nullable
     @Override
@@ -42,6 +46,7 @@ public class FragmentHomePlayer extends Fragment {
 
         checkUser();
         getPlayerInfo();
+
 
         return view;
     }
@@ -70,6 +75,13 @@ public class FragmentHomePlayer extends Fragment {
                     setTextView("Weight: " + temp + " kg");
                     setTextView("Position: " + document.getString("position"));
 
+
+                    String pathURL = "gs://mobileappvolley-16965.appspot.com/" + (document.getLong("id").intValue()) + ".jpg";
+                    StorageReference gsReference = storage.getReferenceFromUrl(pathURL);
+
+                    GlideApp.with(getContext())
+                            .load(gsReference)
+                            .into(fragmentHomePlayerBinding.photo);
                 }
             }
             else{

@@ -24,7 +24,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private Context context;
     private ArrayList<Player> playerArrayList =  new ArrayList<>();
     FirebaseStorage storage = FirebaseStorage.getInstance();
-    StorageReference storageRef = storage.getReference();
 
     public RecyclerViewAdapter(Context context) {
         this.context = context;
@@ -47,13 +46,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         PlayerViewHolder playerViewHolder = (PlayerViewHolder) holder;
         Player player = playerArrayList.get(position);
         playerViewHolder.playerTittle.setText(player.getName());
-//        playerViewHolder.playerNumber.setText(String.valueOf(player.getId()));
         playerViewHolder.playerPosition.setText(player.getPosition());
-            StorageReference storageReference = storageRef.child("Snapchat-411991285.jpg");
 
-            //TODO: do poprawienia implementacja bo nie działa
-        Glide.with(context)
-                .load(storageReference)
+        String pathURL = "gs://mobileappvolley-16965.appspot.com/" + (position + 1) + ".jpg";
+        StorageReference gsReference = storage.getReferenceFromUrl(pathURL);
+
+        GlideApp.with(context)
+                .load(gsReference)
                 .into(playerViewHolder.photo);
 
         holder.itemView.setOnClickListener(view -> {
