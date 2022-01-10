@@ -17,6 +17,7 @@ import com.example.mobileappvolley.fragment.coach.FragmentMatchDateStats;
 import com.example.mobileappvolley.fragment.coach.FragmentNotifications;
 import com.example.mobileappvolley.fragment.coach.StatsDisplayFragment;
 import com.example.mobileappvolley.fragment.coach.TrainingCreatorFragment;
+import com.example.mobileappvolley.fragment.coach.TrainingPlanCreatorFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -46,7 +47,7 @@ public class MainActivityCoach extends AppCompatActivity {
                 FragmentHomeCoach myFragment = new FragmentHomeCoach();
                 this.getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, myFragment).addToBackStack("okj").commit();
             } else if (i == R.id.creator) {
-                TrainingCreatorFragment myFragment = new TrainingCreatorFragment();
+                TrainingPlanCreatorFragment myFragment = new TrainingPlanCreatorFragment();
                 this.getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, myFragment).addToBackStack("okj").commit();
             } else if (i == R.id.exercises) {
                 FragmentExercises myFragment = new FragmentExercises();
