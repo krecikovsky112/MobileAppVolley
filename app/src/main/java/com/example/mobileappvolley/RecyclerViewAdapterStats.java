@@ -20,6 +20,8 @@ import com.example.mobileappvolley.Model.Statistic;
 import com.example.mobileappvolley.ViewHolder.Coach.PlayerViewHolder;
 import com.example.mobileappvolley.fragment.coach.PlayerFragment;
 import com.example.mobileappvolley.fragment.coach.PlayerStatsFragment;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
@@ -30,6 +32,7 @@ public class RecyclerViewAdapterStats extends RecyclerView.Adapter<RecyclerView.
     private ArrayList<Player> playerArrayList = new ArrayList<>();
     private ArrayList<Statistic> statisticArrayList = new ArrayList<>();
     private int selectedPosition = 0;
+    FirebaseStorage storage = FirebaseStorage.getInstance();
 
     public RecyclerViewAdapterStats(Context context) {
         this.context = context;
@@ -65,6 +68,13 @@ public class RecyclerViewAdapterStats extends RecyclerView.Adapter<RecyclerView.
                 setItemView(playerViewHolder, false);
             }
         }
+
+        String pathURL = "gs://mobileappvolley-16965.appspot.com/" + (position + 1) + ".jpg";
+        StorageReference gsReference = storage.getReferenceFromUrl(pathURL);
+
+        GlideApp.with(context)
+                .load(gsReference)
+                .into(playerViewHolder.photo);
 
         holder.itemView.setOnClickListener(view -> {
             setItemView(playerViewHolder, true);
