@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -156,7 +155,7 @@ public class ExerciseFragment extends Fragment {
             @Override
             public void onSuccess(Void unused) {
                 System.out.println("DocumentSnapshot successfully deleted!");
-                FragmentExercises myFragment = new FragmentExercises();
+                FragmentTrainingPlans myFragment = new FragmentTrainingPlans();
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, myFragment).addToBackStack("okj").commit();
             }
         }).addOnFailureListener(e -> System.out.println("Error deleting document" + e));
@@ -165,12 +164,6 @@ public class ExerciseFragment extends Fragment {
     public void onSaveClick(){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-//        EditText age = getActivity().findViewById(R.id.age);
-//        EditText attackRange = getActivity().findViewById(R.id.attackRange);
-//        EditText blockRange = getActivity().findViewById(R.id.blockRange);
-//        EditText height = getActivity().findViewById(R.id.height);
-//        EditText weight = getActivity().findViewById(R.id.weight);
-//        EditText position = getActivity().findViewById(R.id.position);
         Map<String, Object> exerciseE = new HashMap<>();
         exerciseE.put("order",Integer.parseInt(fragmentExerciseBinding.numberSpinner.getSelectedItem().toString()));
         exerciseE.put("urgent",exercise.isUrgent());

@@ -11,12 +11,10 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.mobileappvolley.R;
 import com.example.mobileappvolley.databinding.ActivityCoachBinding;
-import com.example.mobileappvolley.fragment.coach.FragmentExercises;
+import com.example.mobileappvolley.fragment.coach.FragmentTrainingPlans;
 import com.example.mobileappvolley.fragment.coach.FragmentHomeCoach;
 import com.example.mobileappvolley.fragment.coach.FragmentMatchDateStats;
 import com.example.mobileappvolley.fragment.coach.FragmentNotifications;
-import com.example.mobileappvolley.fragment.coach.StatsDisplayFragment;
-import com.example.mobileappvolley.fragment.coach.TrainingCreatorFragment;
 import com.example.mobileappvolley.fragment.coach.TrainingPlanCreatorFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -50,7 +48,7 @@ public class MainActivityCoach extends AppCompatActivity {
                 TrainingPlanCreatorFragment myFragment = new TrainingPlanCreatorFragment();
                 this.getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, myFragment).addToBackStack("okj").commit();
             } else if (i == R.id.exercises) {
-                FragmentExercises myFragment = new FragmentExercises();
+                FragmentTrainingPlans myFragment = new FragmentTrainingPlans();
                 this.getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, myFragment).addToBackStack("okj").commit();
             } else if (i == R.id.notifications) {
                 FragmentNotifications myFragment = new FragmentNotifications();

@@ -13,8 +13,10 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.mobileappvolley.Model.Exercise;
+import com.example.mobileappvolley.Model.TrainingPlan;
 import com.example.mobileappvolley.R;
 import com.example.mobileappvolley.RecyclerViewAdapterExercises;
+import com.example.mobileappvolley.RecyclerViewAdapterTrainingPlans;
 import com.example.mobileappvolley.activity.AuthActivity;
 import com.example.mobileappvolley.databinding.FragmentExercisesBinding;
 import com.google.firebase.auth.FirebaseAuth;
@@ -29,11 +31,11 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
-public class FragmentExercises  extends Fragment {
+public class FragmentTrainingPlans extends Fragment {
     private FragmentExercisesBinding fragmentExercisesBinding;
     private FirebaseAuth firebaseAuth;
-    private RecyclerViewAdapterExercises recyclerViewAdapterExercises;
-    ArrayList<Exercise> exercises = new ArrayList<>();
+    private RecyclerViewAdapterTrainingPlans recyclerViewAdapterTrainingPlans;
+    ArrayList<TrainingPlan> trainingPlans = new ArrayList<>();
 
     @Nullable
     @Override
@@ -48,8 +50,8 @@ public class FragmentExercises  extends Fragment {
         fragmentExercisesBinding.exercisesRecyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext());
         fragmentExercisesBinding.exercisesRecyclerView.setLayoutManager(linearLayoutManager);
-        recyclerViewAdapterExercises = new RecyclerViewAdapterExercises(this.getContext());
-        fragmentExercisesBinding.exercisesRecyclerView.setAdapter(recyclerViewAdapterExercises);
+        recyclerViewAdapterTrainingPlans = new RecyclerViewAdapterTrainingPlans(this.getContext());
+        fragmentExercisesBinding.exercisesRecyclerView.setAdapter(recyclerViewAdapterTrainingPlans);
 
         leadData();
 
@@ -58,26 +60,22 @@ public class FragmentExercises  extends Fragment {
 
     private void leadData() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        CollectionReference ref = db.collection("Exercises");
+        CollectionReference ref = db.collection("TrainingPlan");
 
-        Query query = ref.orderBy("order", Query.Direction.ASCENDING);
+        Query query = ref.orderBy("dateTime", Query.Direction.ASCENDING);
 
         query.addSnapshotListener((value, error) -> {
-            exercises.clear();
+            trainingPlans.clear();
             if (error == null) {
                 for (QueryDocumentSnapshot document : value) {
-                    Exercise exercise = new Exercise();
-                    exercise.setId(document.getId());
-                    exercise.setName(document.getString("name"));
-                    exercise.setNumberRepeat(document.getLong("numberRepeat").intValue());
-                    exercise.setDecription(document.getString("description"));
-                    exercise.setType((ArrayList<String>) document.get("type"));
-                    exercise.setUrgent(document.getBoolean("urgent"));
-                    exercise.setOrder(document.getLong("order").intValue());
-                    exercises.add(exercise);
+                    TrainingPlan trainingPlan = new TrainingPlan();
+                    trainingPlan.setName(document.getString("name"));
+                    trainingPlan.setDateTime(document.getTimestamp("dateTime"));
+                    trainingPlan.setIdExercises((ArrayList<String>)document.get("idExercises"));
+                    trainingPlans.add(trainingPlan);
                 }
-                recyclerViewAdapterExercises.setItems(exercises);
-                recyclerViewAdapterExercises.notifyDataSetChanged();
+                recyclerViewAdapterTrainingPlans.setItems(trainingPlans);
+                recyclerViewAdapterTrainingPlans.notifyDataSetChanged();
             }
 
         });

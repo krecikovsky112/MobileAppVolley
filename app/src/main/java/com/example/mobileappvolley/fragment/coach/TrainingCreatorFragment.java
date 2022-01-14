@@ -104,7 +104,7 @@ public class TrainingCreatorFragment extends Fragment {
                 (dialog, id) -> {
                     ((MainActivityCoach) getActivity()).changeToHomeNavigation();
                     AppCompatActivity activity = (AppCompatActivity) this.getContext();
-                    FragmentHomeCoach myFragment = new FragmentHomeCoach();
+                    TrainingPlanCreatorFragment myFragment = new TrainingPlanCreatorFragment();
                     assert activity != null;
                     activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, myFragment).addToBackStack("okj").commit();
                     dialog.cancel();

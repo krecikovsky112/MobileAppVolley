@@ -28,6 +28,10 @@ public class RecyclerViewAdapterExercises extends RecyclerView.Adapter<RecyclerV
         this.exerciseArrayList.addAll(arrayList);
     }
 
+    public void addItems(Exercise exercise){
+        this.exerciseArrayList.add(exercise);
+    }
+
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

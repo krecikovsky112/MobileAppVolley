@@ -8,13 +8,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.mobileappvolley.Model.Exercise;
 import com.example.mobileappvolley.Model.Notification;
-import com.example.mobileappvolley.ViewHolder.Player.ExerciseViewHolder;
 import com.example.mobileappvolley.ViewHolder.Player.NotificationViewHolder;
-import com.example.mobileappvolley.fragment.coach.FragmentExercises;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
