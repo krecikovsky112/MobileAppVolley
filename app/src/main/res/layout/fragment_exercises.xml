@@ -31,11 +31,35 @@
             android:textColor="@color/main_color"
             android:textSize="50sp" />
 
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/categorySpinner"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/title"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="15dp" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/filter"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/title"
+            android:layout_gravity="center"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+
+            android:layout_marginEnd="10dp"
+            android:layout_toEndOf="@+id/categorySpinner"
+            android:background="@drawable/button_login"
+            android:src="@drawable/filter"
+            android:textColor="@color/white" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/exercisesRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/title"
+            android:layout_below="@+id/filter"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="0dp"
             android:background="#EFF3FF" />

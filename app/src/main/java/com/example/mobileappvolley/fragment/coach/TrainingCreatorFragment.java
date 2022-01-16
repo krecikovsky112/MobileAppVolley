@@ -87,7 +87,6 @@ public class TrainingCreatorFragment extends Fragment {
         builder1.setNegativeButton(
                 "Continue",
                 (dialog, id) -> {
-//                    ((MainActivityCoach) getActivity()).changeToTrainingPlansNavigation();
                     AppCompatActivity activity = (AppCompatActivity) this.getContext();
                     TrainingPlanCreatorFragment myFragment = new TrainingPlanCreatorFragment();
                     assert activity != null;
