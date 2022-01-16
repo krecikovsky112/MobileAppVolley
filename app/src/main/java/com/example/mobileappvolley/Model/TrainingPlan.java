@@ -5,6 +5,7 @@ import com.google.firebase.Timestamp;
 import java.util.ArrayList;
 
 public class TrainingPlan {
+    private String id;
     private Timestamp dateTime;
     private ArrayList<String> idExercises;
     private String name;
@@ -31,6 +32,14 @@ public class TrainingPlan {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
 

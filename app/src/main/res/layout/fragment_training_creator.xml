@@ -117,28 +117,6 @@
                     android:textColor="@color/main_color" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <TextView
-                android:id="@+id/numberSpinnerTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/textArea"
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="100dp"
-                android:layout_marginTop="14dp"
-                android:fontFamily="@font/dongle_regular"
-                android:gravity="center"
-                android:text="Order:"
-                android:textColor="#17358b"
-                android:textSize="35sp" />
-
-            <androidx.appcompat.widget.AppCompatSpinner
-                android:id="@+id/numberSpinner"
-                android:layout_width="100dp"
-                android:layout_height="40dp"
-                android:layout_below="@+id/textArea"
-                android:layout_marginStart="0dp"
-                android:layout_marginTop="14dp"
-                android:layout_toEndOf="@+id/numberSpinnerTextView" />
 
             <RelativeLayout
                 android:id="@+id/checkboxesGroup"
@@ -148,11 +126,10 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="50dp"
-                android:layout_marginTop="0dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="50dp">
 
                 <CheckBox
-                    android:textSize="17sp"
                     android:id="@+id/checkbox_receiver"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
@@ -163,6 +140,7 @@
                     android:fontFamily="@font/roboto"
                     android:text="Receiver"
                     android:textColor="#17358b"
+                    android:textSize="17sp"
                     android:textStyle="bold|italic"
                     app:buttonTint="#17358b" />
 
@@ -231,7 +209,7 @@
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/numberSpinner"
+                android:layout_below="@+id/textArea"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="20dp"
@@ -277,19 +255,6 @@
                 android:textColor="@color/main_color"
                 android:textSize="50sp" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/urgent"
-                android:layout_width="38dp"
-                android:layout_height="38dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="15dp"
-                android:layout_marginEnd="15dp"
-                android:background="@drawable/alarm"
-                android:onClick='@{() -> callback.onUrgentClick()}'
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
         </RelativeLayout>
     </ScrollView>
 

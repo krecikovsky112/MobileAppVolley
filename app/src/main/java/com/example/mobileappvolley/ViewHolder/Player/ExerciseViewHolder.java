@@ -11,13 +11,11 @@ import com.example.mobileappvolley.R;
 
 public class ExerciseViewHolder extends RecyclerView.ViewHolder {
     public TextView exerciseName;
-    public TextView number;
     public TextView description;
 
     public ExerciseViewHolder(@NonNull View itemView) {
         super(itemView);
-        exerciseName = itemView.findViewById(R.id.nameExercise);
-        number = itemView.findViewById(R.id.number);
+        exerciseName = itemView.findViewById(R.id.nameItem);
         description = itemView.findViewById(R.id.descriptionTextView);
     }
 }

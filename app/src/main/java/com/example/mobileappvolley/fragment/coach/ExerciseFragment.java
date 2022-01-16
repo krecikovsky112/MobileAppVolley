@@ -35,11 +35,8 @@ public class ExerciseFragment extends Fragment {
     private static final String ARG_PARAM3 = "description";
     private static final String ARG_PARAM4 = "type";
     private static final String ARG_PARAM5 = "id";
-    private static final String ARG_PARAM6 = "urgent";
-    private static final String ARG_PARAM7 = "order";
     private final Exercise exercise = new Exercise();
     ArrayList<Integer> numbers = new ArrayList<>();
-    private int order;
 
     @Nullable
     @Override
@@ -50,22 +47,6 @@ public class ExerciseFragment extends Fragment {
         firebaseAuth = FirebaseAuth.getInstance();
 
         checkUser();
-
-        for (int i = 1; i < 6; i++) {
-            numbers.add(i);
-        }
-
-        ArrayAdapter<Integer> dataAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, numbers);
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        fragmentExerciseBinding.numberSpinner.setAdapter(dataAdapter);
-        fragmentExerciseBinding.numberSpinner.setSelection(dataAdapter.getPosition(exercise.getOrder()));
-
-        if(exercise.isUrgent()){
-            fragmentExerciseBinding.urgent.setBackgroundResource(R.drawable.alarm_red);
-        }
-        else if(!exercise.isUrgent()){
-            fragmentExerciseBinding.urgent.setBackgroundResource(R.drawable.alarm);
-        }
 
         fragmentExerciseBinding.tittleTextView.setText(exercise.getName());
 
@@ -104,7 +85,7 @@ public class ExerciseFragment extends Fragment {
         }
     }
 
-    public static ExerciseFragment newInstance(String param1, int param2, String param3, ArrayList<String> param4,String param5, boolean param6,int param7){
+    public static ExerciseFragment newInstance(String param1, int param2, String param3, ArrayList<String> param4,String param5){
         ExerciseFragment fragment = new ExerciseFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
@@ -112,8 +93,6 @@ public class ExerciseFragment extends Fragment {
         args.putString(ARG_PARAM3, param3);
         args.putStringArrayList(ARG_PARAM4, param4);
         args.putString(ARG_PARAM5, param5);
-        args.putBoolean(ARG_PARAM6, param6);
-        args.putInt(ARG_PARAM7, param7);
         fragment.setArguments(args);
         return fragment;
     }
@@ -127,25 +106,11 @@ public class ExerciseFragment extends Fragment {
             exercise.setDecription(getArguments().getString(ARG_PARAM3));
             exercise.setType(getArguments().getStringArrayList(ARG_PARAM4));
             exercise.setId(getArguments().getString(ARG_PARAM5));
-            exercise.setUrgent(getArguments().getBoolean(ARG_PARAM6));
-            exercise.setOrder(getArguments().getInt(ARG_PARAM7));
         }
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-
-    }
-
-    public void onUrgentClick(){
-        if(exercise.isUrgent()){
-            exercise.setUrgent(false);
-            fragmentExerciseBinding.urgent.setBackgroundResource(R.drawable.alarm);
-        }
-        else{
-            exercise.setUrgent(true);
-            fragmentExerciseBinding.urgent.setBackgroundResource(R.drawable.alarm_red);
-        }
 
     }
 
@@ -165,8 +130,6 @@ public class ExerciseFragment extends Fragment {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         Map<String, Object> exerciseE = new HashMap<>();
-        exerciseE.put("order",Integer.parseInt(fragmentExerciseBinding.numberSpinner.getSelectedItem().toString()));
-        exerciseE.put("urgent",exercise.isUrgent());
         ArrayList<String> type = new ArrayList<>();
         if (fragmentExerciseBinding.checkboxReceiver.isChecked())
             type.add("Receiver");

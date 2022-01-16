@@ -7,11 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.DatePicker;
-import android.widget.TimePicker;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,18 +19,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.example.mobileappvolley.Model.Exercise;
 import com.example.mobileappvolley.R;
 import com.example.mobileappvolley.RecyclerViewAdapterExercises;
+import com.example.mobileappvolley.activity.MainActivityCoach;
 import com.example.mobileappvolley.databinding.FragmentTrainingplanCreatorBinding;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,8 +39,8 @@ public class TrainingPlanCreatorFragment extends Fragment {
     ArrayList<Exercise> exercises = new ArrayList<>();
     ArrayList<String> exercisesSpinner = new ArrayList<>();
     private RecyclerViewAdapterExercises recyclerViewAdapterExercises;
-    ArrayList<String>exercisesToSave = new ArrayList<>();
-        Calendar calendarToSave;
+    ArrayList<String> exercisesToSave = new ArrayList<>();
+    Calendar calendarToSave;
 
     @Nullable
     @Override
@@ -66,60 +65,91 @@ public class TrainingPlanCreatorFragment extends Fragment {
         });
 
         fragmentTrainingplanCreatorBinding.addExercise.setOnClickListener(v -> {
-            exercisesToSave.add(exercises.get(fragmentTrainingplanCreatorBinding.numberSpinner.getSelectedItemPosition()).getId());
-            recyclerViewAdapterExercises.addItems(exercises.get(fragmentTrainingplanCreatorBinding.numberSpinner.getSelectedItemPosition()));
+            recyclerViewAdapterExercises.addItem(exercises.get(fragmentTrainingplanCreatorBinding.exercisesSpinner.getSelectedItemPosition()));
             recyclerViewAdapterExercises.notifyDataSetChanged();
         });
 
         fragmentTrainingplanCreatorBinding.editTextDatePlanTraining.setOnClickListener(v -> showDateTimeDialog());
 
         fragmentTrainingplanCreatorBinding.save.setOnClickListener(v -> {
+            for(int i = 0;i<recyclerViewAdapterExercises.getItemCount();i++){
+                exercisesToSave.add(recyclerViewAdapterExercises.getExerciseArrayList().get(i).getId());
+            }
+
             FirebaseFirestore db = FirebaseFirestore.getInstance();
             Map<String, Object> trainingPlan = new HashMap<>();
             trainingPlan.put("name", fragmentTrainingplanCreatorBinding.editTextNameTrainingPlan.getText().toString());
 
-            calendarToSave.set(Calendar.SECOND,0);
-            calendarToSave.set(Calendar.MILLISECOND,0);
+            calendarToSave.set(Calendar.SECOND, 0);
+            calendarToSave.set(Calendar.MILLISECOND, 0);
             Timestamp timestamp = new Timestamp(calendarToSave.getTime());
-            trainingPlan.put("dateTime",timestamp);
+            trainingPlan.put("dateTime", timestamp);
 
-            trainingPlan.put("idExercises",exercisesToSave);
+            trainingPlan.put("idExercises", exercisesToSave);
 
             db.collection("TrainingPlan").add(trainingPlan);
+
+            showDialog();
         });
 
         return view;
     }
 
+    private void showDialog() {
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity());
+        builder1.setMessage("Added your exercises. What you want to do?");
+        builder1.setCancelable(true);
+
+        builder1.setPositiveButton(
+                "Add another one",
+                (dialog, id) -> {
+                    fragmentTrainingplanCreatorBinding.editTextNameTrainingPlan.setText("");
+                    fragmentTrainingplanCreatorBinding.editTextDatePlanTraining.setText("");
+                    dialog.cancel();
+                });
+
+        builder1.setNegativeButton(
+                "Continue",
+                (dialog, id) -> {
+                    ((MainActivityCoach) getActivity()).changeToTrainingPlansNavigation();
+                    AppCompatActivity activity = (AppCompatActivity) this.getContext();
+                    FragmentTrainingPlans myFragment = new FragmentTrainingPlans();
+                    assert activity != null;
+                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, myFragment).addToBackStack("okj").commit();
+                    dialog.cancel();
+                });
+
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
+    }
+
     private void showDateTimeDialog() {
         Calendar calendar = Calendar.getInstance();
         DatePickerDialog.OnDateSetListener dateSetListener = (view, year, month, dayOfMonth) -> {
-            calendar.set(Calendar.YEAR,year);
-            calendar.set(Calendar.MONTH,month);
-            calendar.set(Calendar.DAY_OF_MONTH,dayOfMonth);
+            calendar.set(Calendar.YEAR, year);
+            calendar.set(Calendar.MONTH, month);
+            calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
             TimePickerDialog.OnTimeSetListener timeSetListener = (view1, hourOfDay, minute) -> {
-                calendar.set(Calendar.HOUR_OF_DAY,hourOfDay);
-                calendar.set(Calendar.MINUTE,minute);
+                calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                calendar.set(Calendar.MINUTE, minute);
 
                 calendarToSave = calendar;
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
                 fragmentTrainingplanCreatorBinding.editTextDatePlanTraining.setText(simpleDateFormat.format(calendar.getTime()));
             };
 
-            new TimePickerDialog(getActivity(),timeSetListener,calendar.get(Calendar.HOUR_OF_DAY),calendar.get(Calendar.MINUTE),false).show();
+            new TimePickerDialog(getActivity(), timeSetListener, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), false).show();
         };
 
-        new DatePickerDialog(getActivity(),dateSetListener,calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH)).show();
+        new DatePickerDialog(getActivity(), dateSetListener, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
     }
 
     private void leadData() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference ref = db.collection("Exercises");
 
-        Query query = ref.orderBy("order", Query.Direction.ASCENDING);
-
-        query.addSnapshotListener((value, error) -> {
+        ref.addSnapshotListener((value, error) -> {
             exercisesSpinner.clear();
             if (error == null) {
                 for (QueryDocumentSnapshot document : value) {
@@ -129,14 +159,12 @@ public class TrainingPlanCreatorFragment extends Fragment {
                     exercise.setNumberRepeat(document.getLong("numberRepeat").intValue());
                     exercise.setDecription(document.getString("description"));
                     exercise.setType((ArrayList<String>) document.get("type"));
-                    exercise.setUrgent(document.getBoolean("urgent"));
-                    exercise.setOrder(document.getLong("order").intValue());
                     exercises.add(exercise);
                     exercisesSpinner.add(exercise.getName());
                 }
                 ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, exercisesSpinner);
                 dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                fragmentTrainingplanCreatorBinding.numberSpinner.setAdapter(dataAdapter);
+                fragmentTrainingplanCreatorBinding.exercisesSpinner.setAdapter(dataAdapter);
             }
 
         });

@@ -8,16 +8,6 @@ public class Exercise {
     private int numberRepeat;
     private String decription;
     private ArrayList<String> type;
-    private boolean urgent;
-    private int order;
-
-    public int getOrder() {
-        return order;
-    }
-
-    public void setOrder(int order) {
-        this.order = order;
-    }
 
     public String getDecription() {
         return decription;
@@ -57,13 +47,5 @@ public class Exercise {
 
     public void setType(ArrayList<String> type) {
         this.type = type;
-    }
-
-    public boolean isUrgent() {
-        return urgent;
-    }
-
-    public void setUrgent(boolean urgent) {
-        this.urgent = urgent;
     }
 }

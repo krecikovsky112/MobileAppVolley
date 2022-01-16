@@ -22,9 +22,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private ActivityMainBinding activityMainBinding;
-    Fragment fragment;
-    FragmentManager fragmentManager;
-    FragmentTransaction fragmentTransaction;
     private FirebaseUser firebaseUser;
 
 
@@ -68,54 +65,4 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-
-
-    public void addFragmentHomeCoach() {
-        FragmentHomeCoach fragment = new FragmentHomeCoach();
-        fragmentManager = getSupportFragmentManager();
-        fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.fragmentContainer, fragment);
-        fragmentTransaction.commit();
-    }
-
-    public void addFragmentHomePlayer() {
-        FragmentHomePlayer fragment = new FragmentHomePlayer();
-        fragmentManager = getSupportFragmentManager();
-        fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.fragmentContainer, fragment);
-        fragmentTransaction.commit();
-    }
-
-
-//    public void onSubmit() {
-//        FirebaseFirestore db = FirebaseFirestore.getInstance();
-//
-//        Map<String, Object> players = new HashMap<>();
-//        players.put("name",activityMainBinding.name.getText().toString());
-//        players.put("age",Integer.parseInt(activityMainBinding.age.getText().toString()));
-//        players.put("attackRange",Integer.parseInt(activityMainBinding.attackRange.getText().toString()));
-//        players.put("blockRange",Integer.parseInt(activityMainBinding.blockRange.getText().toString()));
-//        players.put("height",Integer.parseInt(activityMainBinding.Height.getText().toString()));
-//        players.put("positionId",Integer.parseInt(activityMainBinding.positionId.getText().toString()));
-//        players.put("weight",Integer.parseInt(activityMainBinding.weight.getText().toString()));
-//
-//    db.collection("Players").document(String.valueOf(counter)).set(players).addOnCompleteListener(task -> {
-//     if(task.isSuccessful()){
-//         Toast.makeText(MainActivity.this,"Values added!",Toast.LENGTH_SHORT).show();
-//         counter++;
-//         activityMainBinding.name.setText("");
-//         activityMainBinding.age.setText("");
-//         activityMainBinding.attackRange.setText("");
-//         activityMainBinding.blockRange.setText("");
-//         activityMainBinding.Height.setText("");
-//         activityMainBinding.positionId.setText("");
-//         activityMainBinding.weight.setText("");
-//     }
-//     else{
-//         Toast.makeText(MainActivity.this,"Error!",Toast.LENGTH_SHORT).show();
-//     }
-//    });
-//
-//    }
-
 }

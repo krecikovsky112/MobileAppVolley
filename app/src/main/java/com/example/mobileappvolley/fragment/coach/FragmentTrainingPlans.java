@@ -37,6 +37,7 @@ public class FragmentTrainingPlans extends Fragment {
     private RecyclerViewAdapterTrainingPlans recyclerViewAdapterTrainingPlans;
     ArrayList<TrainingPlan> trainingPlans = new ArrayList<>();
 
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -69,6 +70,7 @@ public class FragmentTrainingPlans extends Fragment {
             if (error == null) {
                 for (QueryDocumentSnapshot document : value) {
                     TrainingPlan trainingPlan = new TrainingPlan();
+                    trainingPlan.setId(document.getId());
                     trainingPlan.setName(document.getString("name"));
                     trainingPlan.setDateTime(document.getTimestamp("dateTime"));
                     trainingPlan.setIdExercises((ArrayList<String>)document.get("idExercises"));

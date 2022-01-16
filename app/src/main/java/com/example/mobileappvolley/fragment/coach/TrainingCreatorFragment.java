@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,8 +23,6 @@ import java.util.Map;
 
 public class TrainingCreatorFragment extends Fragment {
     private FragmentTrainingCreatorBinding fragmentTrainingCreatorBinding;
-    private boolean urgentFlag = false;
-    ArrayList<Integer> numbers = new ArrayList<>();
 
     @Nullable
     @Override
@@ -33,14 +30,6 @@ public class TrainingCreatorFragment extends Fragment {
         fragmentTrainingCreatorBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_training_creator, container, false);
         fragmentTrainingCreatorBinding.setCallback(this);
         View view = fragmentTrainingCreatorBinding.getRoot();
-
-        for (int i = 1; i < 6; i++) {
-            numbers.add(i);
-        }
-
-        ArrayAdapter<Integer> dataAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, numbers);
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        fragmentTrainingCreatorBinding.numberSpinner.setAdapter(dataAdapter);
 
         return view;
     }
@@ -58,8 +47,6 @@ public class TrainingCreatorFragment extends Fragment {
         exercises.put("name", fragmentTrainingCreatorBinding.editTextNameExercise.getText().toString());
         exercises.put("numberRepeat", Integer.parseInt(fragmentTrainingCreatorBinding.editTextNumberRepeat.getText().toString()));
         exercises.put("description", fragmentTrainingCreatorBinding.editTextDescription.getText().toString());
-        exercises.put("urgent", urgentFlag);
-        exercises.put("order",Integer.parseInt(fragmentTrainingCreatorBinding.numberSpinner.getSelectedItem().toString()));
 
         if (fragmentTrainingCreatorBinding.checkboxReceiver.isChecked())
             type.add("Receiver");
@@ -94,15 +81,13 @@ public class TrainingCreatorFragment extends Fragment {
                     fragmentTrainingCreatorBinding.checkboxReceiver.setChecked(false);
                     fragmentTrainingCreatorBinding.checkboxLibero.setChecked(false);
                     fragmentTrainingCreatorBinding.checkboxMiddleBlocker.setChecked(false);
-                    fragmentTrainingCreatorBinding.urgent.setBackgroundResource(R.drawable.alarm);
-                    urgentFlag = false;
                     dialog.cancel();
                 });
 
         builder1.setNegativeButton(
                 "Continue",
                 (dialog, id) -> {
-                    ((MainActivityCoach) getActivity()).changeToHomeNavigation();
+//                    ((MainActivityCoach) getActivity()).changeToTrainingPlansNavigation();
                     AppCompatActivity activity = (AppCompatActivity) this.getContext();
                     TrainingPlanCreatorFragment myFragment = new TrainingPlanCreatorFragment();
                     assert activity != null;
@@ -112,16 +97,5 @@ public class TrainingCreatorFragment extends Fragment {
 
         AlertDialog alert11 = builder1.create();
         alert11.show();
-    }
-
-    public void onUrgentClick() {
-        if (!urgentFlag) {
-            urgentFlag = true;
-            fragmentTrainingCreatorBinding.urgent.setBackgroundResource(R.drawable.alarm_red);
-        } else {
-            urgentFlag = false;
-            fragmentTrainingCreatorBinding.urgent.setBackgroundResource(R.drawable.alarm);
-        }
-
     }
 }

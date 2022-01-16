@@ -10,13 +10,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mobileappvolley.Model.Exercise;
-import com.example.mobileappvolley.ViewHolder.Coach.ExerciseViewHolder;
+import com.example.mobileappvolley.ViewHolder.Coach.ItemViewHolder;
 import com.example.mobileappvolley.fragment.coach.ExerciseFragment;
 
 import java.util.ArrayList;
 
 public class RecyclerViewAdapterExercises extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context context;
+
+    public ArrayList<Exercise> getExerciseArrayList() {
+        return exerciseArrayList;
+    }
+
     private ArrayList<Exercise> exerciseArrayList =  new ArrayList<>();
 
     public RecyclerViewAdapterExercises(Context context) {
@@ -28,7 +33,7 @@ public class RecyclerViewAdapterExercises extends RecyclerView.Adapter<RecyclerV
         this.exerciseArrayList.addAll(arrayList);
     }
 
-    public void addItems(Exercise exercise){
+    public void addItem(Exercise exercise){
         this.exerciseArrayList.add(exercise);
     }
 
@@ -36,30 +41,35 @@ public class RecyclerViewAdapterExercises extends RecyclerView.Adapter<RecyclerV
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_exercise , parent, false);
-        return new ExerciseViewHolder(view);
+        return new ItemViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        ExerciseViewHolder exerciseViewHolder = (ExerciseViewHolder) holder;
+        ItemViewHolder itemViewHolder = (ItemViewHolder) holder;
         Exercise exercise = exerciseArrayList.get(position);
-        exerciseViewHolder.exerciseName.setText(exercise.getName());
+        itemViewHolder.name.setText(exercise.getName());
         StringBuilder temp = new StringBuilder();
         for(int i = 0 ;i<exercise.getType().size();i++)
         {
+            temp.append("#");
            temp.append(exercise.getType().get(i));
-           temp.append(",");
-        }
-        exerciseViewHolder.typeTextview.setText(temp);
-        if(exercise.isUrgent())
-            exerciseViewHolder.alarmImage.setBackgroundResource(R.drawable.ic_baseline_warning_24);
-        else
-            exerciseViewHolder.alarmImage.setBackgroundResource(R.drawable.ic_baseline_warning_white);
+           temp.append(" ");
 
+        }
+        itemViewHolder.description.setText(temp);
+        itemViewHolder.image.setBackgroundResource(R.drawable.cancel);
+        itemViewHolder.image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                exerciseArrayList.remove(holder.getAdapterPosition());
+                notifyDataSetChanged();
+            }
+        });
 
         holder.itemView.setOnClickListener(view -> {
             AppCompatActivity activity = (AppCompatActivity) view.getContext();
-            ExerciseFragment myFragment= ExerciseFragment.newInstance(exercise.getName(),exercise.getNumberRepeat(),exercise.getDecription(),exercise.getType(),exercise.getId(),exercise.isUrgent(),exercise.getOrder());
+            ExerciseFragment myFragment= ExerciseFragment.newInstance(exercise.getName(),exercise.getNumberRepeat(),exercise.getDecription(),exercise.getType(),exercise.getId());
             activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, myFragment).addToBackStack("okj").commit();
         });
     }

@@ -112,15 +112,12 @@ public class StatsActivity extends AppCompatActivity implements PlayerStatsFragm
 
     void deleteAllDocumentsFromCollection(CollectionReference collection) {
         try {
-            collection.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                    if(task.isSuccessful()){
-                        for(QueryDocumentSnapshot documentSnapshot : task.getResult()){
-                            idDocumentsToDelete.add(documentSnapshot.getId());
+            collection.get().addOnCompleteListener(task -> {
+                if(task.isSuccessful()){
+                    for(QueryDocumentSnapshot documentSnapshot : task.getResult()){
+                        idDocumentsToDelete.add(documentSnapshot.getId());
 
-                            collection.document(documentSnapshot.getId()).delete();
-                        }
+                        collection.document(documentSnapshot.getId()).delete();
                     }
                 }
             });
@@ -166,10 +163,6 @@ public class StatsActivity extends AppCompatActivity implements PlayerStatsFragm
                 ft.commit();
                 recyclerViewAdapter.setItems(players);
                 recyclerViewAdapter.notifyDataSetChanged();
-
-//                PlayerStatsFragment myFragment = PlayerStatsFragment.newInstance(players.get(0).getIdUser());
-//                this.getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, myFragment).commit();
-
             }
 
         });
@@ -182,6 +175,5 @@ public class StatsActivity extends AppCompatActivity implements PlayerStatsFragm
 
     @Override
     public void send(Statistic statistic) {
-        String temp;
     }
 }

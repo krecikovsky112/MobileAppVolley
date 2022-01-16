@@ -22,9 +22,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class FragmentLogin extends Fragment{
     private FragmentLoginBinding loginFragmentBinding;
-    private static final int RC_SIGN_IN = 100;
     private FirebaseAuth firebaseAuth;
-    private static final String TAG = "GOOGLE_SIGN_IN_TAG";
     CallbackFragment callbackFragment;
 
     @Nullable

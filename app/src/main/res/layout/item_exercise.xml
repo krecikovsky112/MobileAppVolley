@@ -1,62 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="2dp"
-        >
+        android:layout_margin="2dp">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:background="@drawable/rounded"
-            >
+            android:orientation="horizontal">
+
             <RelativeLayout
-                android:layout_width="80dp"
+                android:layout_width="75dp"
                 android:layout_height="70dp">
 
-                <ImageView
-                    android:id="@+id/alarmImage"
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/deleteImage"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentBottom="true"
                     android:layout_marginStart="15dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="15dp"
                     android:layout_marginBottom="10dp" />
+                <!--                <ImageView-->
+                <!--                    android:id="@+id/imageItem"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="match_parent"-->
+                <!--                    android:layout_alignParentStart="true"-->
+                <!--                    android:layout_alignParentTop="true"-->
+                <!--                    android:layout_alignParentEnd="true"-->
+                <!--                    android:layout_alignParentBottom="true"-->
+                <!--                    android:layout_marginStart="15dp"-->
+                <!--                    android:layout_marginTop="10dp"-->
+                <!--                    android:layout_marginEnd="15dp"-->
+                <!--                    android:layout_marginBottom="10dp" />-->
             </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:orientation="vertical">
+
                 <TextView
+                    android:id="@+id/nameItem"
                     android:layout_width="match_parent"
+
                     android:layout_height="35dp"
-                    android:text="Text"
-                    android:textColor="@color/white"
-                    android:fontFamily="@font/dongle_regular"
-                    android:textSize="35sp"
-                    android:paddingLeft="10dp"
-                    android:gravity="left"
                     android:layout_marginBottom="5dp"
-                    android:id="@+id/nameExercise"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="35dp"
+                    android:fontFamily="@font/dongle_regular"
+                    android:gravity="left"
+                    android:paddingLeft="10dp"
                     android:text="Text"
                     android:textColor="@color/white"
-                    android:fontFamily="@font/dongle_regular"
-                    android:textSize="28sp"
-                    android:paddingLeft="10dp"
-                    android:gravity="left"
-                    android:id="@+id/typeTextView"/>
-            </LinearLayout>
+                    android:textSize="35sp" />
 
+                <TextView
+                    android:id="@+id/descriptionItem"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:fontFamily="@font/dongle_regular"
+                    android:gravity="left"
+                    android:paddingLeft="10dp"
+                    android:text="Text"
+                    android:textColor="@color/white"
+                    android:textSize="28sp" />
+            </LinearLayout>
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>

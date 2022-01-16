@@ -56,7 +56,7 @@ public class MainActivityCoach extends AppCompatActivity {
             } else if (i == R.id.stats) {
                 FragmentMatchDateStats myFragment = new FragmentMatchDateStats();
                 this.getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, myFragment).addToBackStack("okj").commit();
- }
+            }
         });
     }
 
@@ -76,7 +76,7 @@ public class MainActivityCoach extends AppCompatActivity {
         }
     }
 
-    public void changeToHomeNavigation() {
-        activityCoachBinding.navigationbar.setItemSelected(R.id.home, true);
+    public void changeToTrainingPlansNavigation() {
+        activityCoachBinding.navigationbar.setItemSelected(R.id.exercises, true);
     }
 }

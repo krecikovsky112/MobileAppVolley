@@ -13,42 +13,26 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.mobileappvolley.Model.Exercise;
+import com.example.mobileappvolley.Model.TrainingPlan;
 import com.example.mobileappvolley.R;
-import com.example.mobileappvolley.RecyclerViewAdapterExercises;
 import com.example.mobileappvolley.RecyclerViewAdapterExercisesPlayer;
 import com.example.mobileappvolley.activity.AuthActivity;
 import com.example.mobileappvolley.databinding.FragmentExercisesPlayerBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
 
-public class FragmentExercises extends Fragment {
-    private static final String ARG_PARAM1 = "position";
+public class FragmentTrainingPlans extends Fragment {
     private FragmentExercisesPlayerBinding fragmentExercisesPlayerBinding;
     private FirebaseAuth firebaseAuth;
     private RecyclerViewAdapterExercisesPlayer recyclerViewAdapterExercisesPlayer;
-    ArrayList<Exercise> exercises = new ArrayList<>();
-    private String positionPlayer;
+    ArrayList<TrainingPlan> trainingPlans = new ArrayList<>();
 
-    public static FragmentExercises newInstance(String param1){
-        FragmentExercises fragment = new FragmentExercises();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            positionPlayer = getArguments().getString(ARG_PARAM1);
-        }
-    }
 
     @Nullable
     @Override
@@ -72,29 +56,22 @@ public class FragmentExercises extends Fragment {
     private void leadData() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        Query query = db.collection("Exercises");
+        CollectionReference ref = db.collection("TrainingPlan");
 
+        Query query = ref.orderBy("dateTime", Query.Direction.ASCENDING);
 
         query.addSnapshotListener((value, error) -> {
-            exercises.clear();
+            trainingPlans.clear();
             if (error == null) {
                 for (QueryDocumentSnapshot document : value) {
-                    ArrayList<String> positions = (ArrayList<String>)document.get("type");
-                    for(int i = 0;i<positions.size();i++){
-                        if(positions.get(i).equals(positionPlayer)){
-                            Exercise exercise = new Exercise();
-                            exercise.setId(document.getId());
-                            exercise.setName(document.getString("name"));
-                            exercise.setNumberRepeat(document.getLong("numberRepeat").intValue());
-                            exercise.setDecription(document.getString("description"));
-                            exercise.setType(positions);
-                            exercise.setUrgent(document.getBoolean("urgent"));
-                            exercises.add(exercise);
-                        }
-                    }
+                    TrainingPlan trainingPlan = new TrainingPlan();
+                    trainingPlan.setId(document.getId());
+                    trainingPlan.setName(document.getString("name"));
+                    trainingPlan.setDateTime(document.getTimestamp("dateTime"));
+                    trainingPlan.setIdExercises((ArrayList<String>)document.get("idExercises"));
+                    trainingPlans.add(trainingPlan);
                 }
-                RecyclerViewAdapterExercisesPlayer.counter = 1;
-                recyclerViewAdapterExercisesPlayer.setItems(exercises);
+                recyclerViewAdapterExercisesPlayer.setItems(trainingPlans);
                 recyclerViewAdapterExercisesPlayer.notifyDataSetChanged();
             }
 
