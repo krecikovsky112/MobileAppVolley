@@ -178,8 +178,10 @@ public class FragmentChartStats extends Fragment {
 
 
         ArrayList<PieEntry> paramsServe = new ArrayList<>();
+        float temp = (float)teamStatistic.getErrorServe() / teamStatistic.getAllServe() * 100 + (float) teamStatistic.getAceServe() / teamStatistic.getAllServe() * 100;
         paramsServe.add(new PieEntry((float)teamStatistic.getErrorServe() / teamStatistic.getAllServe() * 100,"Error"));
         paramsServe.add(new PieEntry((float) teamStatistic.getAceServe() / teamStatistic.getAllServe() * 100,"Ace"));
+        paramsServe.add(new PieEntry((float) 100 - temp,"Normal"));
 
         PieDataSet pieDataSet4 = new PieDataSet(paramsServe,"Serve");
         pieDataSet4.setColors(ColorTemplate.COLORFUL_COLORS);
@@ -198,9 +200,7 @@ public class FragmentChartStats extends Fragment {
 
     private void getTeamStatistics(Statistic statistic) {
         teamStatistic.setPoints(teamStatistic.getPoints() + statistic.getPoints());
-        teamStatistic.setPerfAttack(teamStatistic.getPerfAttack() + statistic.getPerfAttack());
         teamStatistic.setAllBlock(teamStatistic.getAllBlock() + statistic.getAllBlock());
-        teamStatistic.setAceServe(teamStatistic.getAceServe() + statistic.getAceServe());
 
         teamStatistic.setAllAttack(teamStatistic.getAllAttack() + statistic.getAllAttack());
         teamStatistic.setErrorAttack(teamStatistic.getErrorAttack() + statistic.getErrorAttack());

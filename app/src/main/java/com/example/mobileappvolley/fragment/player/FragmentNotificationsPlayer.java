@@ -55,7 +55,7 @@ public class FragmentNotificationsPlayer extends Fragment {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference ref = db.collection("Notifications");
 
-        Query query = ref.orderBy("time", Query.Direction.ASCENDING);
+        Query query = ref.orderBy("time", Query.Direction.DESCENDING);
 
         query.addSnapshotListener((value, error) -> {
             notificationArrayList.clear();

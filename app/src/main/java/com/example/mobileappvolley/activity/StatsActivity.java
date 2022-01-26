@@ -115,21 +115,6 @@ public class StatsActivity extends AppCompatActivity implements PlayerStatsFragm
         });
     }
 
-//    void deleteAllDocumentsFromCollection(CollectionReference collection) {
-//        try {
-//            collection.get().addOnCompleteListener(task -> {
-//                if(task.isSuccessful()){
-//                    for(QueryDocumentSnapshot documentSnapshot : task.getResult()){
-//                        idDocumentsToDelete.add(documentSnapshot.getId());
-//
-//                        collection.document(documentSnapshot.getId()).delete();
-//                    }
-//                }
-//            });
-//        } catch (Exception e) {
-//            System.err.println("Error deleting collection : " + e.getMessage());
-//        }
-//    }
 
     private void leadData() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();

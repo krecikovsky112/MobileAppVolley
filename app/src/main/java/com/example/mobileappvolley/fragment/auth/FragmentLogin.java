@@ -42,7 +42,6 @@ public class FragmentLogin extends Fragment{
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
         if (firebaseUser != null) {
             startActivity(new Intent(getActivity(), MainActivity.class));
-            getActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         }
     }
 
@@ -51,7 +50,6 @@ public class FragmentLogin extends Fragment{
                 .addOnCompleteListener(getActivity(), task -> {
                     if (task.isSuccessful()) {
                         startActivity(new Intent(getActivity(), MainActivity.class));
-                        getActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                     } else {
                         Toast.makeText(getActivity(), "Failure", Toast.LENGTH_LONG).show();
                     }

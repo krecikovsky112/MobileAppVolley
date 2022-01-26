@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -88,6 +89,7 @@ public class PlayerFragment extends Fragment {
         editText = new EditText(getActivity());
         setAttributesEditText(face,editText);
         editText.setId(R.id.age);
+        editText.setInputType(InputType.TYPE_CLASS_NUMBER);
         editText.setText(String.valueOf(player.getAge()));
         textView = new TextView(getActivity());
         setAttributesTextView(face, textView);
@@ -101,6 +103,7 @@ public class PlayerFragment extends Fragment {
         editText = new EditText(getActivity());
         setAttributesEditText(face,editText);
         editText.setId(R.id.attackRange);
+        editText.setInputType(InputType.TYPE_CLASS_NUMBER);
         editText.setText(String.valueOf(player.getAttackRange()));
         textView = new TextView(getActivity());
         setAttributesTextView(face, textView);
@@ -114,6 +117,7 @@ public class PlayerFragment extends Fragment {
         editText = new EditText(getActivity());
         setAttributesEditText(face,editText);
         editText.setId(R.id.blockRange);
+        editText.setInputType(InputType.TYPE_CLASS_NUMBER);
         editText.setText(String.valueOf(player.getBlockRange()));
         textView = new TextView(getActivity());
         setAttributesTextView(face, textView);
@@ -127,6 +131,7 @@ public class PlayerFragment extends Fragment {
         editText = new EditText(getActivity());
         setAttributesEditText(face,editText);
         editText.setId(R.id.height);
+        editText.setInputType(InputType.TYPE_CLASS_NUMBER);
         editText.setText(String.valueOf(player.getHeight()));
         textView = new TextView(getActivity());
         setAttributesTextView(face, textView);
@@ -140,6 +145,7 @@ public class PlayerFragment extends Fragment {
         editText = new EditText(getActivity());
         setAttributesEditText(face,editText);
         editText.setId(R.id.weight);
+        editText.setInputType(InputType.TYPE_CLASS_NUMBER);
         editText.setText(String.valueOf(player.getWeight()));
         textView = new TextView(getActivity());
         setAttributesTextView(face, textView);

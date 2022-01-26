@@ -31,13 +31,13 @@ public class FragmentRegister extends Fragment {
     private FragmentRegisterBinding registerFragmentBinding;
     private FirebaseAuth firebaseAuth;
     private FirebaseFirestore fstore;
-    String userID,role_user;
+    String userID, role_user;
 
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        registerFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_register,container,false);
+        registerFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_register, container, false);
         registerFragmentBinding.setCallback(this);
         View view = registerFragmentBinding.getRoot();
         firebaseAuth = FirebaseAuth.getInstance();
@@ -48,35 +48,31 @@ public class FragmentRegister extends Fragment {
     public void onSubmit() {
         if (!registerFragmentBinding.inputEmailText.getText().toString().isEmpty() &&
                 !registerFragmentBinding.editTextPassword.getText().toString().isEmpty()) {
-            firebaseRegister(registerFragmentBinding.inputEmailText.getText().toString(), registerFragmentBinding.editTextPassword.getText().toString());
+            firebaseRegister(registerFragmentBinding.inputEmailText.getText().toString(),
+                    registerFragmentBinding.editTextPassword.getText().toString());
         }
 
     }
 
     private void firebaseRegister(String email, String password) {
-        firebaseAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
-                    Toast.makeText(getActivity(),"Registering user succesfull", Toast.LENGTH_SHORT).show();
-                    userID = firebaseAuth.getCurrentUser().getUid();
-                    DocumentReference documentReference = fstore.collection("Users").document(userID);
-                    Map<String,Object> user = new HashMap<>();
-                    user.put("fullname",registerFragmentBinding.editTextFullName.getText().toString());
-                    user.put("email",registerFragmentBinding.inputEmailText.getText().toString());
-                    user.put("password",registerFragmentBinding.editTextPassword.getText().toString());
-                    user.put("role",role_user);
-                    documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void unused) {
-                            Log.d("TAG","onSuccess: user Profile is created for " + userID);
-                        }
-                    });
-                }
-                else
-                {
-                    Toast.makeText(getActivity(),"Registering user failed", Toast.LENGTH_SHORT).show();
-                }
+        firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(getActivity(), task -> {
+            if (task.isSuccessful()) {
+                Toast.makeText(getActivity(), "Registering user succesfull", Toast.LENGTH_SHORT).show();
+                userID = firebaseAuth.getCurrentUser().getUid();
+                DocumentReference documentReference = fstore.collection("Users").document(userID);
+                Map<String, Object> user = new HashMap<>();
+                user.put("fullname", registerFragmentBinding.editTextFullName.getText().toString());
+                user.put("email", registerFragmentBinding.inputEmailText.getText().toString());
+                user.put("password", registerFragmentBinding.editTextPassword.getText().toString());
+                user.put("role", role_user);
+                documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Log.d("TAG", "onSuccess: user Profile is created for " + userID);
+                    }
+                });
+            } else {
+                Toast.makeText(getActivity(), "Registering user failed", Toast.LENGTH_SHORT).show();
             }
         });
     }

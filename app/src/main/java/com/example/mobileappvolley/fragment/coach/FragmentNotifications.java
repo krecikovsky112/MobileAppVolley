@@ -27,6 +27,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.messaging.FirebaseMessaging;
 
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -68,6 +69,9 @@ public class FragmentNotifications extends Fragment {
         notification.put("title",fragmentNotificationsCoachBinding.editTextTitle.getText().toString());
         notification.put("description",fragmentNotificationsCoachBinding.editTextMessage.getText().toString());
         notification.put("id","all");
+        long dateTime = System.currentTimeMillis();
+        Timestamp timestamp = new Timestamp(dateTime);
+        notification.put("time",timestamp);
         db.collection("Notifications").add(notification);
 
         FcmNotificationsSender notificationsSender = new FcmNotificationsSender("/topics/all",

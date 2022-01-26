@@ -10,6 +10,16 @@ public class TrainingPlan {
     private ArrayList<String> idExercises;
     private String name;
 
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    private String category;
+
     public Timestamp getDateTime() {
         return dateTime;
     }

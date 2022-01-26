@@ -41,6 +41,7 @@ public class TrainingPlanCreatorFragment extends Fragment {
     private RecyclerViewAdapterExercises recyclerViewAdapterExercises;
     ArrayList<String> exercisesToSave = new ArrayList<>();
     Calendar calendarToSave;
+    ArrayList<String> categories = new ArrayList<>();
 
     @Nullable
     @Override
@@ -55,6 +56,9 @@ public class TrainingPlanCreatorFragment extends Fragment {
         fragmentTrainingplanCreatorBinding.exercisesRecyclerView.setLayoutManager(linearLayoutManager);
         recyclerViewAdapterExercises = new RecyclerViewAdapterExercises(this.getContext());
         fragmentTrainingplanCreatorBinding.exercisesRecyclerView.setAdapter(recyclerViewAdapterExercises);
+
+
+        initCategorySpinner();
 
         leadData();
 
@@ -86,6 +90,7 @@ public class TrainingPlanCreatorFragment extends Fragment {
             trainingPlan.put("dateTime", timestamp);
 
             trainingPlan.put("idExercises", exercisesToSave);
+            trainingPlan.put("category",fragmentTrainingplanCreatorBinding.categorySpinner.getSelectedItem().toString());
 
             db.collection("TrainingPlan").add(trainingPlan);
 
@@ -95,9 +100,20 @@ public class TrainingPlanCreatorFragment extends Fragment {
         return view;
     }
 
+    private void initCategorySpinner() {
+        categories.add("default");
+        categories.add("normal");
+        categories.add("pre-match");
+        categories.add("post-match");
+        categories.add("preparatory");
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, categories);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        fragmentTrainingplanCreatorBinding.categorySpinner.setAdapter(dataAdapter);
+    }
+
     private void showDialog() {
         AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity());
-        builder1.setMessage("Added your exercises. What you want to do?");
+        builder1.setMessage("Added your training plan. What you want to do?");
         builder1.setCancelable(true);
 
         builder1.setPositiveButton(
