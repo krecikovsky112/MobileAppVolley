@@ -85,12 +85,6 @@ public class StatsDisplayFragment extends Fragment {
         boolean isTablet = isTablet(getContext());
         if (isTablet) {
             leadDataStatsTablet();
-            fragmentStatsCoachBinding.createStatisticButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    startActivity(new Intent(getActivity(), StatsActivity.class));
-                }
-            });
         } else {
             leadDataStatsPhone();
         }

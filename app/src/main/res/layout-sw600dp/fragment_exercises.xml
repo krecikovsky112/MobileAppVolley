@@ -15,6 +15,29 @@
         android:padding="2dp"
         tools:context=".fragment.coach.FragmentTrainingPlans">
 
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/categorySpinner"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/title"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="220dp"
+            android:layout_marginTop="15dp" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/filter"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/title"
+            android:layout_gravity="center"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="12dp"
+
+            android:layout_marginEnd="10dp"
+            android:layout_toEndOf="@+id/categorySpinner"
+            android:background="@drawable/button_login"
+            android:src="@drawable/filter"
+            android:textColor="@color/white" />
         <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
@@ -35,7 +58,7 @@
             android:id="@+id/exercisesRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/title"
+            android:layout_below="@+id/categorySpinner"
             android:layout_marginTop="10dp"
             android:layout_marginStart="50dp"
             android:layout_marginEnd="50dp"

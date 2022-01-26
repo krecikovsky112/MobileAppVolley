@@ -5,16 +5,14 @@
     <data>
         <variable
             name="callback"
-            type="com.example.mobileappvolley.fragment.coach.FragmentMatchDateStats" />
+            type="com.example.mobileappvolley.fragment.coach.FragmentChartStats" />
     </data>
-
     <RelativeLayout
 
         android:layout_width="match_parent"
         android:layout_height="600dp"
         android:padding="2dp"
-        tools:context=".fragment.coach.FragmentMatchDateStats">
-
+        tools:context=".fragment.coach.FragmentChartStats">
         <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
@@ -26,32 +24,16 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="25dp"
             android:fontFamily="@font/dongle_regular"
-            android:text="History of matches"
+            android:text="Team stats"
             android:textAlignment="center"
             android:textColor="@color/main_color"
             android:textSize="50sp" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/historyStatsRecyclerView"
+        <com.github.mikephil.charting.charts.BarChart
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_below="@+id/title"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="0dp"
-            android:background="#EFF3FF" />
-
-        <ImageButton
-            android:id="@+id/createStatisticButton"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="900dp"
-            android:layout_marginEnd="22dp"
-            android:layout_marginBottom="0dp"
-            android:background="@drawable/button_login"
-            android:src="@drawable/ic_baseline_create_48" />
-
+            android:layout_marginTop="0dp" />
     </RelativeLayout>
 
 </layout>

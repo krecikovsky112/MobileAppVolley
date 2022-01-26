@@ -11,21 +11,21 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.mobileappvolley.Model.MatchDate;
 import com.example.mobileappvolley.Model.Player;
 import com.example.mobileappvolley.Model.Statistic;
 import com.example.mobileappvolley.R;
 import com.example.mobileappvolley.RecyclerViewAdapterStats;
 import com.example.mobileappvolley.databinding.ActivityStatsBinding;
 import com.example.mobileappvolley.fragment.coach.PlayerStatsFragment;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,6 +38,7 @@ public class StatsActivity extends AppCompatActivity implements PlayerStatsFragm
     private RecyclerViewAdapterStats recyclerViewAdapter;
     private PlayerStatsFragment playerStatsFragment;
     private ArrayList<String> idDocumentsToDelete = new ArrayList<>();
+    private MatchDate matchDate = new MatchDate();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,8 +58,12 @@ public class StatsActivity extends AppCompatActivity implements PlayerStatsFragm
             @Override
             public void onClick(View v) {
                 FirebaseFirestore db = FirebaseFirestore.getInstance();
-                CollectionReference ref = db.collection("Stats");
-                deleteAllDocumentsFromCollection(ref);
+
+                matchDate.setMatchDate(Timestamp.now());
+                Map<String,Object> matchDate_t = new HashMap<>();
+                matchDate_t.put("matchDate",matchDate.getMatchDate());
+                matchDate_t.put("win",matchDate.isWin());
+                Task<DocumentReference> documentReference = db.collection("HistoryMatches").add(matchDate_t);
 
                 for(int i = 0;i< players.size();i++){
                     Map<String, Object> statistic = new HashMap<>();
@@ -97,7 +102,7 @@ public class StatsActivity extends AppCompatActivity implements PlayerStatsFragm
                         block.put("all", tempStatistic.getAllBlock());
                         statistic.put("block", block);
 
-                        statistic.put("matchDate",Timestamp.now().getSeconds());
+                        statistic.put("matchDate",matchDate.getMatchDate().getSeconds());
 
                         db.collection("Stats").add(statistic);
 
@@ -110,21 +115,21 @@ public class StatsActivity extends AppCompatActivity implements PlayerStatsFragm
         });
     }
 
-    void deleteAllDocumentsFromCollection(CollectionReference collection) {
-        try {
-            collection.get().addOnCompleteListener(task -> {
-                if(task.isSuccessful()){
-                    for(QueryDocumentSnapshot documentSnapshot : task.getResult()){
-                        idDocumentsToDelete.add(documentSnapshot.getId());
-
-                        collection.document(documentSnapshot.getId()).delete();
-                    }
-                }
-            });
-        } catch (Exception e) {
-            System.err.println("Error deleting collection : " + e.getMessage());
-        }
-    }
+//    void deleteAllDocumentsFromCollection(CollectionReference collection) {
+//        try {
+//            collection.get().addOnCompleteListener(task -> {
+//                if(task.isSuccessful()){
+//                    for(QueryDocumentSnapshot documentSnapshot : task.getResult()){
+//                        idDocumentsToDelete.add(documentSnapshot.getId());
+//
+//                        collection.document(documentSnapshot.getId()).delete();
+//                    }
+//                }
+//            });
+//        } catch (Exception e) {
+//            System.err.println("Error deleting collection : " + e.getMessage());
+//        }
+//    }
 
     private void leadData() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -166,6 +171,14 @@ public class StatsActivity extends AppCompatActivity implements PlayerStatsFragm
             }
 
         });
+    }
+
+    public void onRadioButtonClickedWin(){
+        matchDate.setWin(true);
+    }
+
+    public void onRadioButtonClickedLose(){
+        matchDate.setWin(false);
     }
 
     @Override

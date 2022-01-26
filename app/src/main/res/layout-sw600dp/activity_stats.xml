@@ -34,6 +34,41 @@
 
         </FrameLayout>
 
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="100dp"
+            android:layout_marginBottom="20dp"
+            android:layout_toEndOf="@+id/homeRecyclerView"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/radio_player"
+                style="@android:style/Widget.Material.CompoundButton.RadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:fontFamily="@font/roboto"
+                android:onClick='@{() -> callback.onRadioButtonClickedWin()}'
+                android:text="WIN"
+                android:textColor="#17358b"
+                android:textStyle="bold"
+                app:buttonTint="#17358b" />
+
+            <RadioButton
+                android:id="@+id/radio_coach"
+                style="@style/Widget.AppCompat.CompoundButton.RadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:fontFamily="@font/roboto"
+                android:onClick='@{() -> callback.onRadioButtonClickedLose()}'
+                android:text="LOSE"
+                android:textColor="#17358b"
+                android:textStyle="bold"
+                app:buttonTint="#17358b" />
+        </RadioGroup>
+
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/sendDataButton"
             android:layout_width="wrap_content"

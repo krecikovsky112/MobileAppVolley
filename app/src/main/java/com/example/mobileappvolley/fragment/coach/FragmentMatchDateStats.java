@@ -1,5 +1,8 @@
 package com.example.mobileappvolley.fragment.coach;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +19,7 @@ import com.example.mobileappvolley.Model.MatchDate;
 import com.example.mobileappvolley.R;
 import com.example.mobileappvolley.RecyclerViewAdapterExercises;
 import com.example.mobileappvolley.RecyclerViewAdapterHistoryStats;
+import com.example.mobileappvolley.activity.StatsActivity;
 import com.example.mobileappvolley.databinding.FragmentMatchesdateStatsBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
@@ -50,8 +54,23 @@ public class FragmentMatchDateStats extends Fragment {
 
         leadData();
 
+        boolean isTablet = isTablet(getContext());
+        if (isTablet) {
+            fragmentMatchesdateStatsBinding.createStatisticButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(getActivity(), StatsActivity.class));
+                }
+            });
+        }
 
         return view;
+    }
+
+    public boolean isTablet(Context context) {
+        boolean xlarge = ((context.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == 4);
+        boolean large = ((context.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_LARGE);
+        return (xlarge || large);
     }
 
     private void leadData() {
@@ -60,21 +79,25 @@ public class FragmentMatchDateStats extends Fragment {
 
         Query query = ref.orderBy("matchDate", Query.Direction.DESCENDING);
 
-        query.addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                matchDateArrayList.clear();
-                if (error == null) {
-                    for (QueryDocumentSnapshot document : value) {
-                        MatchDate matchDate = new MatchDate();
-                        matchDate.setMatchDate(document.getTimestamp("matchDate"));
-                        matchDateArrayList.add(matchDate);
+        query.addSnapshotListener((value, error) -> {
+            matchDateArrayList.clear();
+            if (error == null) {
+                for (QueryDocumentSnapshot document : value) {
+                    MatchDate matchDate = new MatchDate();
+                    matchDate.setMatchDate(document.getTimestamp("matchDate"));
+                    try{
+                        boolean temp = document.getBoolean("win");
+                        matchDate.setWin(temp);
+                    }catch (NullPointerException e){
+                        e.printStackTrace();
                     }
-                    recyclerViewAdapterHistoryStats.setItems(matchDateArrayList);
-                    recyclerViewAdapterHistoryStats.notifyDataSetChanged();
-                }
-            }
 
+
+                    matchDateArrayList.add(matchDate);
+                }
+                recyclerViewAdapterHistoryStats.setItems(matchDateArrayList);
+                recyclerViewAdapterHistoryStats.notifyDataSetChanged();
+            }
         });
     }
 }

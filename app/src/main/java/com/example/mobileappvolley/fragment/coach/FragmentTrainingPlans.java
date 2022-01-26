@@ -88,6 +88,9 @@ public class FragmentTrainingPlans extends Fragment {
 
             });
         }
+        else{
+            leadData();
+        }
     }
 
     private void initCategories() {
