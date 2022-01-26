@@ -30,12 +30,99 @@
             android:textAlignment="center"
             android:textColor="@color/main_color"
             android:textSize="50sp" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textViewDateFrom"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/title"
+            android:layout_alignParentStart="true"
 
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="10dp"
+
+            android:hint="Date from"
+            android:textColorHint="@color/main_color"
+            app:boxBackgroundColor="@color/white"
+            app:boxStrokeColor="@color/main_color"
+            app:counterTextColor="@color/main_color"
+            app:hintTextColor="@color/main_color"
+            app:placeholderTextColor="@color/main_color"
+            app:startIconDrawable="@drawable/ic_baseline_calendar_month_24"
+            app:startIconTint="@color/main_color">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextDateFrom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textField"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="0dp"
+                android:ems="10"
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:inputType="text"
+                android:textColor="@color/main_color" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textViewDateTo"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textViewDateFrom"
+            android:layout_alignParentStart="true"
+
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="10dp"
+
+            android:hint="Date to"
+            android:textColorHint="@color/main_color"
+            app:boxBackgroundColor="@color/white"
+            app:boxStrokeColor="@color/main_color"
+            app:counterTextColor="@color/main_color"
+            app:hintTextColor="@color/main_color"
+            app:placeholderTextColor="@color/main_color"
+            app:startIconDrawable="@drawable/ic_baseline_calendar_month_24"
+            app:startIconTint="@color/main_color">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextDateTo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textField"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="0dp"
+                android:ems="10"
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:inputType="text"
+                android:textColor="@color/main_color" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/filter"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/title"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="center"
+            android:layout_marginStart="10dp"
+
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="25dp"
+            android:layout_toEndOf="@+id/textViewPlanTrainingDate"
+            android:background="@drawable/button_login"
+            android:src="@drawable/filter"
+            android:textColor="@color/white" />
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/historyStatsRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/title"
+            android:layout_below="@+id/textViewDateTo"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="0dp"
             android:background="#EFF3FF" />

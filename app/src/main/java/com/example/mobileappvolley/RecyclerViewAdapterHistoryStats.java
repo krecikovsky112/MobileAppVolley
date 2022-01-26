@@ -78,6 +78,7 @@ public class RecyclerViewAdapterHistoryStats extends RecyclerView.Adapter<Recycl
     }
 
     public void setItems(ArrayList<MatchDate> matchDateArrayList) {
+        this.statsArrayList.clear();
         this.statsArrayList.addAll(matchDateArrayList);
     }
 }
