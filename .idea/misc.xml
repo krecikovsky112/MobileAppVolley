@@ -25,6 +25,8 @@
         <entry key="..\:/Semestr7/MobileAppVolley/app/src/main/res/layout-sw600dp/fragment_home_coach.xml" value="0.2" />
         <entry key="..\:/Semestr7/MobileAppVolley/app/src/main/res/layout-sw600dp/fragment_login.xml" value="0.275" />
         <entry key="..\:/Semestr7/MobileAppVolley/app/src/main/res/layout-sw600dp/fragment_matchesdate_stats.xml" value="0.264" />
+        <entry key="..\:/Semestr7/MobileAppVolley/app/src/main/res/layout-sw600dp/fragment_period_player_stats.xml" value="0.1717948717948718" />
+        <entry key="..\:/Semestr7/MobileAppVolley/app/src/main/res/layout-sw600dp/fragment_period_teams_stats.xml" value="0.1625" />
         <entry key="..\:/Semestr7/MobileAppVolley/app/src/main/res/layout-sw600dp/fragment_player.xml" value="0.1842948717948718" />
         <entry key="..\:/Semestr7/MobileAppVolley/app/src/main/res/layout-sw600dp/fragment_register.xml" value="0.3092948717948718" />
         <entry key="..\:/Semestr7/MobileAppVolley/app/src/main/res/layout-sw600dp/fragment_stats_coach.xml" value="0.264" />
@@ -51,6 +53,8 @@
         <entry key="..\:/Semestr7/MobileAppVolley/app/src/main/res/layout/fragment_notification_to_concrete_player.xml" value="0.19423076923076923" />
         <entry key="..\:/Semestr7/MobileAppVolley/app/src/main/res/layout/fragment_notifications_coach.xml" value="0.16891025641025642" />
         <entry key="..\:/Semestr7/MobileAppVolley/app/src/main/res/layout/fragment_notifications_player.xml" value="0.22592592592592592" />
+        <entry key="..\:/Semestr7/MobileAppVolley/app/src/main/res/layout/fragment_period_player_stats.xml" value="0.22592592592592592" />
+        <entry key="..\:/Semestr7/MobileAppVolley/app/src/main/res/layout/fragment_period_teams_stats.xml" value="0.22592592592592592" />
         <entry key="..\:/Semestr7/MobileAppVolley/app/src/main/res/layout/fragment_player.xml" value="0.19647435897435897" />
         <entry key="..\:/Semestr7/MobileAppVolley/app/src/main/res/layout/fragment_register.xml" value="0.2" />
         <entry key="..\:/Semestr7/MobileAppVolley/app/src/main/res/layout/fragment_stats_coach.xml" value="0.22592592592592592" />

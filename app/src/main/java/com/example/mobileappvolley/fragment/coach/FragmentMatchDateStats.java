@@ -63,10 +63,18 @@ public class FragmentMatchDateStats extends Fragment {
 
         boolean isTablet = isTablet(getContext());
         if (isTablet) {
-            fragmentMatchesdateStatsBinding.createStatisticButton.setOnClickListener(new View.OnClickListener() {
+            fragmentMatchesdateStatsBinding.createStatisticButton.setOnClickListener(v -> startActivity(new Intent(getActivity(), StatsActivity.class)));
+
+            fragmentMatchesdateStatsBinding.periodTeamStats.setOnClickListener(v -> {
+                FragmentPeriodTeamStats fragmentPeriodTeamStats = FragmentPeriodTeamStats.newInstance(matchDateArrayList);
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragmentPeriodTeamStats).addToBackStack("okj").commit();
+            });
+
+            fragmentMatchesdateStatsBinding.periodPlayerStats.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity(new Intent(getActivity(), StatsActivity.class));
+                    FragmentPeriodPlayerStats fragmentPeriodPlayerStats = FragmentPeriodPlayerStats.newInstance(matchDateArrayList);
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragmentPeriodPlayerStats).addToBackStack("okj").commit();
                 }
             });
         }
