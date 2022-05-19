@@ -172,6 +172,7 @@ public class FragmentPeriodPlayerStats extends Fragment {
         setLineChartAttributes();
 
         fragmentPeriodPlayerStatsBinding.lineChartEffectiveness.setData(data);
+        fragmentPeriodPlayerStatsBinding.lineChartEffectiveness.invalidate();
     }
 
     private void setLineChartAttributes() {

@@ -134,6 +134,7 @@ public class FragmentChartStats extends Fragment {
         fragmentChartStatsBinding.pieChartPoints.setCenterTextColor(Color.BLACK);
         fragmentChartStatsBinding.pieChartPoints.setCenterTextSize(22f);
         fragmentChartStatsBinding.pieChartPoints.animate();
+        fragmentChartStatsBinding.pieChartPoints.invalidate();
 
 
         ArrayList<PieEntry> paramsAttack = new ArrayList<>();
@@ -154,6 +155,7 @@ public class FragmentChartStats extends Fragment {
         fragmentChartStatsBinding.pieChartAttack.setCenterTextColor(Color.BLACK);
         fragmentChartStatsBinding.pieChartAttack.setCenterTextSize(22f);
         fragmentChartStatsBinding.pieChartAttack.animate();
+        fragmentChartStatsBinding.pieChartAttack.invalidate();
 
 
         ArrayList<PieEntry> paramsReceive = new ArrayList<>();
@@ -175,6 +177,7 @@ public class FragmentChartStats extends Fragment {
         fragmentChartStatsBinding.pieChartReceive.setCenterTextColor(Color.BLACK);
         fragmentChartStatsBinding.pieChartReceive.setCenterTextSize(22f);
         fragmentChartStatsBinding.pieChartReceive.animate();
+        fragmentChartStatsBinding.pieChartReceive.invalidate();
 
 
         ArrayList<PieEntry> paramsServe = new ArrayList<>();
@@ -196,6 +199,7 @@ public class FragmentChartStats extends Fragment {
         fragmentChartStatsBinding.pieChartServe.setCenterTextColor(Color.BLACK);
         fragmentChartStatsBinding.pieChartServe.setCenterTextSize(22f);
         fragmentChartStatsBinding.pieChartServe.animate();
+        fragmentChartStatsBinding.pieChartServe.invalidate();
     }
 
     private void getTeamStatistics(Statistic statistic) {

@@ -156,6 +156,7 @@ public class FragmentPeriodTeamStats extends Fragment {
         setLineChartAttributes();
 
         fragmentPeriodTeamsStatsBinding.lineChartAttackEffectivnes.setData(data);
+        fragmentPeriodTeamsStatsBinding.lineChartAttackEffectivnes.invalidate();
     }
 
     private void setLineChartAttributes() {

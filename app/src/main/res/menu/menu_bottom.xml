@@ -21,7 +21,7 @@
         />
     <item
         android:id="@+id/exercises"
-        android:title="Exercises"
+        android:title="Plans"
         android:icon="@drawable/note"
         app:cnb_backgroundColor="#17358b"
         app:cnb_iconColor="#fff"
